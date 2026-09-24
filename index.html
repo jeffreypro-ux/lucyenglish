@@ -5,475 +5,604 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lucy 的英语复习站</title>
 <style>
-  :root{
-    --bg:#f7f4ef; --card:#ffffff; --ink:#2b2620; --sub:#8a8177;
-    --accent:#c25e3a; --accent-soft:#f6e3da; --line:#e9e2d8;
-    --green:#5b7f5b; --radius:16px;
-    --shadow:0 2px 10px rgba(60,45,30,.06);
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
-    background:var(--bg); color:var(--ink); line-height:1.75;}
-  .wrap{max-width:920px;margin:0 auto;padding:0 20px;}
+/* ================= 基础 ================= */
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#FFF9F2;
+  --card:#FFFFFF;
+  --ink:#33302B;
+  --muted:#9A9186;
+  --accent:#FF6B4A;
+  --accent-soft:#FFE9E2;
+  --green:#2E9E6B;
+  --green-soft:#E3F4EC;
+  --blue:#3E6FB0;
+  --blue-soft:#E7EEF8;
+  --line:#F2E8DA;
+  --radius:16px;
+  --shadow:0 2px 10px rgba(51,48,43,.05);
+}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 18px;}
+.en{font-family:Georgia,"Times New Roman",serif;}
 
-  header{background:linear-gradient(135deg,#fff 0%,var(--accent-soft) 100%);
-    border-bottom:1px solid var(--line); padding:36px 0 0;}
-  .tag{display:inline-block;background:var(--accent);color:#fff;font-size:12px;
-    padding:3px 12px;border-radius:99px;letter-spacing:2px;margin-bottom:12px;}
-  h1{font-size:28px;letter-spacing:1px;}
-  .sub{color:var(--sub);margin-top:6px;font-size:14px;padding-bottom:20px;}
+/* ================= 顶部 ================= */
+header.top{
+  background:var(--card);border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:100;
+}
+header.top .wrap{height:58px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:17px;font-weight:800;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px;}
+.logo::before{content:"📖";font-size:18px;}
+nav.tabs{display:flex;gap:6px;}
+nav.tabs a{
+  text-decoration:none;color:var(--muted);font-size:14px;padding:6px 14px;border-radius:999px;
+}
+nav.tabs a.on,nav.tabs a:hover{background:var(--accent-soft);color:var(--accent);}
 
-  /* 顶部页签 */
-  .tabs{display:flex;gap:8px;padding-bottom:0;}
-  .tab{padding:10px 22px;border:none;background:transparent;font-size:15px;
-    color:var(--sub);cursor:pointer;border-radius:12px 12px 0 0;font-weight:600;}
-  .tab.active{background:var(--bg);color:var(--accent);}
-  .tab:hover{color:var(--accent);}
+/* ================= 声音设置 ================= */
+.voice-panel{
+  background:linear-gradient(135deg,#FFF1E8,#FFE7DC);
+  border:1px solid #FFD9C8;border-radius:var(--radius);
+  padding:14px 18px;margin:18px 0 0;
+}
+.voice-panel summary{cursor:pointer;font-weight:700;font-size:14px;list-style:none;display:flex;align-items:center;gap:8px;}
+.voice-panel summary::before{content:"🔊";}
+.voice-panel summary::-webkit-details-marker{display:none;}
+.voice-panel .row{margin-top:10px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+.voice-panel select{
+  font-size:13px;padding:6px 10px;border-radius:10px;border:1px solid #F0C9B6;background:#fff;max-width:100%;
+}
+.voice-panel input[type=range]{width:160px;accent-color:var(--accent);}
+.voice-panel .tip{font-size:12px;color:var(--muted);margin-top:6px;}
 
-  .toolbar{display:flex;gap:10px;margin:24px 0 18px;flex-wrap:wrap;align-items:center;}
-  .search{flex:1;min-width:180px;padding:11px 16px;border:1px solid var(--line);
-    border-radius:99px;font-size:14px;background:#fff;outline:none;}
-  .search:focus{border-color:var(--accent);}
-  .btn{padding:11px 18px;border:none;border-radius:99px;background:var(--ink);
-    color:#fff;font-size:13px;cursor:pointer;}
-  .btn:hover{background:var(--accent);}
-  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);}
+/* ================= 首页 ================= */
+.hero{padding:44px 0 10px;text-align:center;}
+.hero .hello{font-size:14px;color:var(--accent);font-weight:700;letter-spacing:2px;}
+.hero h1{font-size:30px;margin:6px 0 8px;}
+.hero p{color:var(--muted);font-size:14px;}
+.hero .chips{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+.hero .chip{
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:6px 18px;font-size:13px;color:var(--muted);box-shadow:var(--shadow);
+}
+.hero .chip b{color:var(--accent);}
 
-  /* 课程卡片 */
-  .lesson-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:20px 22px;margin-bottom:14px;cursor:pointer;box-shadow:var(--shadow);
-    transition:transform .15s;display:flex;gap:16px;align-items:center;}
-  .lesson-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(60,45,30,.10);}
-  .num{flex:none;width:52px;height:52px;border-radius:14px;background:var(--accent-soft);
-    color:var(--accent);font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center;}
-  .card-title{font-size:17px;font-weight:600;}
-  .card-meta{color:var(--sub);font-size:13px;margin-top:3px;}
-  .arrow{color:var(--sub);font-size:20px;flex:none;margin-left:auto;}
-  .empty{text-align:center;color:var(--sub);padding:60px 0;display:none;}
+.lesson-grid{padding:16px 0 40px;}
+a.lesson-card{
+  display:block;text-decoration:none;color:inherit;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow);
+  transition:transform .15s,box-shadow .15s;
+}
+a.lesson-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(51,48,43,.09);}
+.lesson-card .top-row{display:flex;justify-content:space-between;align-items:center;}
+.lesson-card .no{
+  font-size:12px;font-weight:800;color:var(--accent);background:var(--accent-soft);
+  border-radius:999px;padding:2px 12px;
+}
+.lesson-card .date{font-size:12px;color:var(--muted);}
+.lesson-card h2{font-size:17px;margin:8px 0 4px;}
+.lesson-card .sub{font-size:13px;color:var(--muted);}
+.lesson-card .tags{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;}
+.lesson-card .tag{font-size:11px;color:var(--green);background:var(--green-soft);border-radius:999px;padding:1px 9px;}
+.lesson-card.soon{opacity:.55;}
 
-  /* 笔记详情 */
-  .detail{display:none;background:var(--card);border:1px solid var(--line);
-    border-radius:var(--radius);padding:34px 38px;box-shadow:var(--shadow);margin-bottom:40px;}
-  .detail.show{display:block;animation:fade .25s;}
-  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-  .back{border:none;background:none;color:var(--accent);cursor:pointer;font-size:14px;margin-bottom:16px;padding:0;}
-  .d-title{font-size:24px;margin-bottom:4px;}
-  .d-meta{color:var(--sub);font-size:13px;margin-bottom:22px;}
-  .d-section{margin-bottom:26px;}
-  .d-section h3{font-size:16px;color:var(--accent);margin-bottom:10px;
-    border-left:4px solid var(--accent);padding-left:10px;}
-  .d-section ul,.d-section ol{padding-left:22px;}
-  .d-section li{margin-bottom:8px;}
-  .en{color:var(--green);font-weight:600;}
-  .tip{background:var(--accent-soft);border-radius:12px;padding:14px 18px;font-size:14px;margin-top:8px;}
-  .dialog{background:#fbf9f5;border:1px dashed var(--line);border-radius:12px;padding:14px 18px;font-size:14px;margin-top:8px;}
-  .dialog p{margin-bottom:6px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
-  .dialog .who{color:var(--accent);font-weight:600;flex:none;}
-  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px;}
-  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left;vertical-align:top;}
-  th{background:#faf6f0;}
-  .homework{background:#eef4ee;border-radius:12px;padding:14px 18px;font-size:14px;}
+/* ================= 课时页 ================= */
+.lesson-head{padding:30px 0 4px;}
+.lesson-head .crumb{font-size:13px;color:var(--muted);margin-bottom:8px;}
+.lesson-head .crumb a{color:var(--accent);text-decoration:none;}
+.lesson-head h1{font-size:24px;}
+.lesson-head .meta{color:var(--muted);font-size:13px;margin-top:4px;}
+.lesson-head .tags{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+.lesson-head .tag{font-size:11px;color:var(--green);background:var(--green-soft);border-radius:999px;padding:1px 9px;}
 
-  /* 发音按钮 */
-  .speak{border:1px solid var(--line);background:#fff;border-radius:99px;padding:2px 10px;
-    font-size:12px;color:var(--accent);cursor:pointer;flex:none;line-height:1.6;}
-  .speak:hover{background:var(--accent);color:#fff;}
-  .speak.on{background:var(--accent);color:#fff;}
+section.sec{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;margin-top:16px;box-shadow:var(--shadow);
+}
+section.sec>h2{
+  font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px;
+}
+section.sec>h2::before{
+  content:"";width:5px;height:16px;border-radius:3px;background:var(--accent);flex:none;
+}
+section.sec ul{margin-left:20px;font-size:14.5px;}
+section.sec li{margin:6px 0;}
+section.sec p{font-size:14.5px;margin:6px 0;}
 
-  /* 单词卡 */
-  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin-bottom:40px;}
-  .flip{perspective:900px;height:170px;cursor:pointer;}
-  .flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
-  .flip.flipped .flip-inner{transform:rotateY(180deg);}
-  .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius);
-    border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px;text-align:center;}
-  .face.back{transform:rotateY(180deg);background:#fbf7f2;}
-  .word{font-size:22px;font-weight:700;color:var(--ink);}
-  .phon{color:var(--sub);font-size:13px;}
-  .meaning{font-size:15px;color:var(--green);font-weight:600;}
-  .example{font-size:12.5px;color:var(--sub);line-height:1.5;}
-  .flip-hint{font-size:11px;color:var(--sub);}
+.speak{
+  border:none;background:var(--accent-soft);color:var(--accent);cursor:pointer;
+  border-radius:999px;width:26px;height:26px;font-size:13px;flex:none;
+  display:inline-flex;align-items:center;justify-content:center;margin-left:6px;vertical-align:middle;
+}
+.speak:hover{background:var(--accent);color:#fff;}
 
-  /* 语音设置弹窗 */
-  .modal-mask{display:none;position:fixed;inset:0;background:rgba(40,30,20,.45);z-index:50;}
-  .modal-mask.show{display:flex;align-items:center;justify-content:center;}
-  .modal{background:#fff;border-radius:18px;max-width:600px;width:92%;max-height:85vh;overflow:auto;padding:28px 30px;}
-  .modal h2{font-size:19px;margin-bottom:14px;}
-  .modal label{font-size:13px;color:var(--sub);display:block;margin:12px 0 4px;}
-  .modal select,.modal input[type=range]{width:100%;padding:8px;border:1px solid var(--line);border-radius:10px;font-size:14px;}
-  .modal ol{padding-left:22px;font-size:14px;}
-  .modal li{margin-bottom:8px;}
-  pre{background:#2b2620;color:#f0ead9;padding:16px;border-radius:12px;font-size:12.5px;overflow:auto;line-height:1.6;margin:12px 0;}
-  .voice-status{font-size:12px;color:var(--sub);margin-top:6px;}
+.ok{color:var(--green);font-weight:700;}
+.no{color:#C25B4A;text-decoration:line-through;text-decoration-color:rgba(194,91,74,.4);}
+.why{font-size:13px;color:var(--muted);}
+.b{font-weight:700;color:var(--accent);}
+.bbox{
+  background:var(--blue-soft);border-radius:12px;padding:12px 16px;font-size:14.5px;
+  margin:8px 0;overflow-x:auto;
+}
+.dialog .line{display:flex;gap:10px;margin:9px 0;font-size:14.5px;align-items:flex-start;}
+.dialog .who{
+  flex:none;font-size:12px;font-weight:700;border-radius:999px;padding:2px 11px;margin-top:3px;
+}
+.dialog .lucy .who{background:var(--accent-soft);color:var(--accent);}
+.dialog .mike .who{background:var(--blue-soft);color:var(--blue);}
+.dialog .msg{flex:1;}
+.hw{background:var(--green-soft);border-radius:12px;padding:12px 16px;font-size:14.5px;}
 
-  footer{color:var(--sub);font-size:12px;text-align:center;padding:26px 0 40px;}
-  @media(max-width:640px){.detail{padding:24px 20px;}h1{font-size:23px;}}
+.pager{display:flex;justify-content:space-between;gap:10px;margin:26px 0 40px;flex-wrap:wrap;}
+.pager a{
+  flex:1;min-width:130px;text-align:center;text-decoration:none;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;font-size:13px;
+}
+.pager a:hover{border-color:var(--accent);color:var(--accent);}
+.pager a small{display:block;color:var(--muted);font-size:11px;}
+
+/* ================= 单词页 ================= */
+.word-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:12px;padding:16px 0 40px;
+}
+.word-card{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;box-shadow:var(--shadow);cursor:pointer;
+  transition:transform .15s;
+}
+.word-card:hover{transform:translateY(-2px);}
+.word-card .w{font-size:17px;font-weight:800;color:var(--accent);display:flex;align-items:center;}
+.word-card .p{font-size:12px;color:var(--muted);font-family:Georgia,serif;}
+.word-card .m{font-size:13.5px;margin-top:4px;}
+.word-card .e{font-size:13px;color:var(--blue);margin-top:4px;font-family:Georgia,serif;}
+
+/* ================= 更新说明 ================= */
+.howto{
+  background:#FFF4E4;border:1px dashed #F0C9A0;border-radius:var(--radius);
+  padding:16px 20px;margin:10px 0 40px;font-size:13px;color:#8A6D4D;
+}
+.howto h3{font-size:14px;margin-bottom:6px;}
+.howto code{
+  display:block;background:#fff;border-radius:10px;padding:10px 12px;margin:8px 0;
+  font-size:12px;overflow-x:auto;color:#6B543A;white-space:pre;
+}
+.howto b{color:#B0722E;}
+
+footer{padding:22px 0;text-align:center;color:var(--muted);font-size:12px;}
+
+@media (max-width:560px){
+  .hero h1{font-size:25px;}
+  .lesson-head h1{font-size:21px;}
+}
 </style>
+<base target="_blank">
 </head>
 <body>
 
-<header>
+<header class="top">
   <div class="wrap">
-    <span class="tag">ENGLISH REVIEW</span>
-    <h1>Lucy 的英语复习站</h1>
-    <p class="sub">课后笔记 + 单词卡 · 真人感女声发音 · 点击卡片即可复习</p>
+    <a class="logo" href="#/">Lucy 的英语复习站</a>
     <nav class="tabs">
-      <button class="tab active" id="tab-lessons" onclick="switchTab('lessons')">📒 课程笔记</button>
-      <button class="tab" id="tab-words" onclick="switchTab('words')">🃏 单词卡</button>
+      <a href="#/" data-nav="home">首页</a>
+      <a href="#/words" data-nav="words">单词本</a>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
-  <!-- 课程页 -->
-  <section id="page-lessons">
-    <div class="toolbar">
-      <input class="search" id="search" type="text" placeholder="搜索课程关键词，如：疑问句 / 奥德赛 / 婚礼…">
-      <button class="btn ghost" onclick="testVoice()">🔊 试听声音</button>
-      <button class="btn ghost" onclick="openVoiceSettings()">⚙ 声音设置</button>
-      <button class="btn" onclick="openHelp()">＋ 添加课程教程</button>
+<div class="wrap">
+
+  <details class="voice-panel" id="voicePanel">
+    <summary>声音设置</summary>
+    <div class="row">
+      选择声音（推荐女声 💃）
+      <select id="voiceSel"><option value="">加载中…</option></select>
     </div>
-    <div id="list"></div>
-    <div class="empty" id="empty">没有找到相关课程</div>
-    <article class="detail" id="detail"></article>
-  </section>
-
-  <!-- 单词卡页 -->
-  <section id="page-words" style="display:none">
-    <div class="toolbar">
-      <span style="font-size:13px;color:var(--sub)">点击卡片翻面 · 点 🔊 听发音（女声）</span>
-      <button class="btn ghost" onclick="shuffleWords()">🔀 随机洗牌</button>
-      <button class="btn ghost" onclick="openVoiceSettings()">⚙ 声音设置</button>
+    <div class="row">
+      语速 <span id="rateVal">0.9</span>
+      <input type="range" id="rateRange" min="0.5" max="1.5" step="0.1" value="0.9">
     </div>
-    <div class="cards" id="cards"></div>
-  </section>
-</main>
+    <div class="tip">发音使用浏览器内置语音引擎（免费、无需联网）。没有 mp3 录音时，点 🔊 按钮即可朗读。</div>
+  </details>
 
-<footer>Lucy English Review · 声音设置保存在本机浏览器</footer>
+  <main id="app"></main>
 
-<!-- 声音设置弹窗 -->
-<div class="modal-mask" id="voiceMask">
-  <div class="modal">
-    <h2>🔊 声音设置</h2>
-    <p style="font-size:13px;color:var(--sub)">发音使用浏览器内置语音引擎（免费、无需联网下载），不同设备可选的声音不同。列表里标 💃 的是女声。</p>
-    <label>选择声音（推荐女声）</label>
-    <select id="voiceSelect" onchange="saveVoice()"><option value="">加载中…</option></select>
-    <div class="voice-status" id="voiceStatus"></div>
-    <label>语速：<span id="rateVal">0.9</span></label>
-    <input type="range" id="rate" min="0.5" max="1.2" step="0.1" value="0.9" oninput="document.getElementById('rateVal').textContent=this.value;saveVoice();">
-    <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;">
-      <button class="btn" onclick="testVoice()">试听 Hello, Lucy!</button>
-      <button class="btn ghost" onclick="document.getElementById('voiceMask').classList.remove('show')">关闭</button>
-    </div>
-  </div>
-</div>
-
-<!-- 更新指南弹窗 -->
-<div class="modal-mask" id="mask" onclick="if(event.target===this)this.classList.remove('show')">
-  <div class="modal">
-    <h2>如何更新网站内容？</h2>
-    <p style="font-size:14px;margin-bottom:10px;"><b>① 添加一节新课：</b>打开 index.html，搜索定位到 <b>★★★ 新课程粘贴在这一行的上方 ★★★</b>，复制一节模板粘贴到上方，改内容保存即可：</p>
-    <pre>{
-  id: 2,
-  date: "2026-09-20",
-  title: "第二课：标题",
-  subtitle: "Mike 老师 · 口语实战",
-  sections: [
-    { h: "一、核心句型", type: "list", items: [
-      "&lt;span class='en'&gt;English sentence.&lt;/span&gt; 中文。" ] },
-    { h: "二、对话", type: "dialog", lines: [
-      ["Lucy", "What did you do?"],
-      ["Mike", "I stayed at home."] ] },
-    { h: "课后作业", type: "homework", text: "复述并录音。" }
-  ]
-}</pre>
-    <p style="font-size:14px;margin-bottom:10px;"><b>② 添加单词：</b>在 <b>WORDS</b> 数据区同样格式加一行：</p>
-    <pre>{ w:"envelope", p:"/ˈenvələʊp/", m:"n. 信封", e:"Grab the red envelope!" }</pre>
-    <p style="font-size:13px;color:var(--sub);margin-bottom:10px;"><b>③ 想用真人录音/mp3？</b>把 mp3 传到仓库 audio/ 文件夹，然后在数据里加 <code>audio:"audio/xxx.mp3"</code>，网站会优先播放 mp3，没有就自动用内置女声。</p>
-    <button class="btn" onclick="document.getElementById('mask').classList.remove('show')">知道了</button>
-  </div>
+  <footer>Lucy 的英语复习站 · 坚持打卡，每天进步一点点 ✨</footer>
 </div>
 
 <script>
-/* ============================================================
-   ★ 课程数据区 ★  新课粘贴到数组最前面（列表顶部）
-   sections 的 type：list 知识点列表 / table 中英对照表
-              dialog 对话 / tip 老师提醒 / homework 作业
-   ============================================================ */
+/* ================================================================
+   ★★★ 课程内容数据区（老师只需要改这里）★★★
+   新增一节课：复制一个 LESSONS 里的模板，粘贴到
+   “新课程粘贴在这一行的上方”标记处，修改 id / date / title / sections
+   section 的 type 支持：
+     list     → 要点列表（items 为 HTML 字符串数组，可写 <span class='en'>）
+     dialog   → 对话（lines: [[说话人, 内容], ...]）
+     homework → 课后作业（text 为 HTML 字符串）
+     也可以直接用 note → 一段文字（text）
+   想加真人录音：在课程对象里加 audio:"audio/xxx.mp3"（mp3 放仓库 audio/ 文件夹）
+================================================================ */
+
 const LESSONS = [
-{
-  id: 1,
-  date: "2026-09-16",
-  title: "第一课：疑问句 + 陈述句入门",
-  subtitle: "Mike 老师 · 口语实战 · 课文朗读《Aunt Lucy》",
-  intro: "从山西婚礼的闲聊切入，系统复习特殊疑问句与一般疑问句的造句逻辑，再用「电影推荐」做真实对话实战，最后用 and/but/so 把「你的一天」讲成一段流利的陈述。",
-  sections: [
-    { h: "一、课前热身：聊聊周末", type: "list", items: [
-      "去山西参加婚礼：<span class='en'>I went to Shanxi for a wedding.</span>（火车三个半小时 <span class='en'>three and a half hours by train</span>）",
-      "抢红包：<span class='en'>grab red envelopes</span>（envelope 信封；grab 抢）",
-      "旅游景点：<span class='en'>scenic spots / sightseeing spots</span>（scenery 是风景，spot 才是景点）",
-      "参加新店开业活动：<span class='en'>I will attend the new store opening event.</span>（event 比 activity 更适合庆典类活动）",
-      "和同事一起去：<span class='en'>I will go there with my coworker / teammate.</span>"
-    ]},
-    { h: "二、课文朗读《Aunt Lucy》", type: "tip", text: "星期天赖床，姑姑突然来电话。注意一般过去时动词：got up, looked, rang。老师评价：读得很不错。" },
-    { h: "三、特殊疑问句（工作场景 6 句）", type: "table", head: ["中文", "英文"], rows: [
-      ["你在寻找哪一类设计风格？","<span class='en'>What type of design style are you looking for?</span>"],
-      ["哪种材料最适配你的项目？","<span class='en'>Which material is the best fit for your project?</span>"],
-      ["你们团队谁负责采购？","<span class='en'>Who is in charge of purchasing in your team?</span>"],
-      ["你预计什么时候敲定这个项目？","<span class='en'>When do you expect to finalize this project?</span>"],
-      ["为什么这个项目对你们如此重要？","<span class='en'>Why is this project so important to you?</span>"],
-      ["你们如何评估材料的可行性？","<span class='en'>How do you assess the feasibility of this material?</span>"]
-    ]},
-    { h: "四、一般疑问句（舞蹈工作室场景 7 句）", type: "table", head: ["中文", "英文"], rows: [
-      ["你是想要宽敞的舞蹈练习区吗？","<span class='en'>Are you looking for a spacious dancing practice area?</span>"],
-      ["这个空间的层高足够吗？","<span class='en'>Is the ceiling height of this space enough?</span>"],
-      ["我是否适合负责您这个舞蹈项目？","<span class='en'>Am I the right person to handle your dance studio project?</span>"],
-      ["我们应该考虑隔音设计吗？","<span class='en'>Should we consider the sound insulation design?</span>"],
-      ["我们可以调整镜子的尺寸吗？","<span class='en'>Could we adjust the size of the mirrors?</span>"],
-      ["你们会在三个月内完成方案吗？","<span class='en'>Will you finish the proposal within three months?</span>"],
-      ["我现在给您展示效果图好吗？","<span class='en'>Shall I show you the renderings now?</span>"]
-    ]},
-    { h: "五、造句心法", type: "tip", text: "① 先锁定疑问词（what/which/who/when/why/how）→ ② 找主语 → ③ 主语是人用 are/do，是物用 is/does → ④ 补剩下的成分。单词一定要说对，语序小错没关系。自己把思路讲一遍，比听老师讲十句印象更深。" },
-    { h: "六、电影《奥德赛》对话演练", type: "dialog", lines: [
-      ["Lucy", "Hi Mike. Long time no see. Did you watch the Odyssey film?"],
-      ["Mike", "Yes. This movie is so popular. I watched it last weekend."],
-      ["Lucy", "When did you watch it? Who came with you?"],
-      ["Mike", "I just went by myself. This movie is quite long, almost three hours."],
-      ["Lucy", "Would you recommend this film to me?"],
-      ["Mike", "If you are a fan of Game of Thrones or epic history movies, yes. Otherwise maybe wait for the streaming media version — the first hour is a bit slow."],
-      ["Lucy", "Do you advise girls to watch it?"],
-      ["Mike", "The movie doesn't depend on gender, but you should come with friends — the music is suddenly very loud and some scenes can be shocking."],
-      ["Lucy", "Does the film make me uncomfortable?"],
-      ["Mike", "Well, if you're sensitive, do some mental preparation first. I recommend the IMAX version!"]
-    ]},
-    { h: "七、陈述句：描述你的一天", type: "list", items: [
-      "万能结构：<span class='en'>and / but / so / because</span> 把短句串起来",
-      "先铺垫再展开：<span class='en'>Well, today is a good day and the weather is nice.</span>",
-      "范文：<span class='en'>Well, today is a good day. I made up in the morning and took the bus to my office. The weather is nice, so I feel very happy in the morning. In the afternoon I ordered milk tea by takeout, and I negotiated with the supplier about the cost of the project, but I failed, so I'm very angry. How about you?</span>",
-      "地道表达：化妆 <span class='en'>make up</span>；点外卖 <span class='en'>order takeout</span>；砍价/谈判 <span class='en'>bargain / negotiate</span>；摸鱼 <span class='en'>take a rest</span>；下班 <span class='en'>off work</span>；普通的一天 <span class='en'>a common day</span>"
-    ]},
-    { h: "八、老师点评", type: "tip", text: "优点：不会硬想词卡住，懂得停顿。加强：多用 and 并联句子；句间用 well 自然过渡；别被 because 卡壳。对话比上节更顺畅、更生活化。" },
-    { h: "课后作业", type: "homework", text: "① 捋顺今天内容，录一条流利的微信语音发给 Mike 老师（当晚 11 点前）；② 周六前给老师答复。" }
-  ]
-}
-/* ★★★ 新课程粘贴在这一行的上方 ★★★ */
+
+  /* ---------- 第 3 课（最新在上） ---------- */
+  {
+    id: 3,
+    date: "2026-09-23",
+    title: "第三课：并列句——把句子流利地连起来",
+    subtitle: "Mike 老师 · 热身闲聊 · 疑问句复习 · 并列句 and/but/so",
+    tags: ["并列句", "and/but/so", "设计师词汇", "整段输出"],
+    sections: [
+      { h: "一、热身闲聊", type: "list", items: [
+        "上周去<strong>上海出差</strong>，参加开幕式：attend the opening ceremony。",
+        "中秋节放 <span class='b'>4 天</span>假（其中 3 天要回公司上班）；国庆节 <span class='b'>National Day</span> 放 7 天，计划开车去<span class='b'>扬州</span>旅行。",
+        "假期必堵车：<span class='en'>There's always a traffic jam on the holiday.</span>",
+        "放假前上班状态：满脑子都是假期 → <span class='en'>Everything goes around the holiday.</span>",
+      ]},
+      { h: "二、上节复习：三种疑问句", type: "list", items: [
+        "<strong>特殊疑问句</strong>：<span class='no'>✗ What's your feeling today?</span> → <span class='ok'>✓ How do you feel today? / What do you feel today?</span><br><span class='why'>feel 是动词，疑问句要请助动词 do 帮忙。</span>",
+        "<strong>一般疑问句</strong>：<span class='no'>✗ Do you have dinner?</span> → <span class='ok'>✓ Did you have dinner? / Have you had dinner?</span><br><span class='why'>“吃了吗”问的是过去 → did；或现在完成时 Have you had…（最地道）。</span>",
+        "<strong>情态动词</strong>：<span class='no'>✗ Shall you…?</span> → <span class='ok'>✓ Shall we begin the class today?</span><br><span class='why'>shall 只跟 I / we，没有 shall you。</span>",
+      ]},
+      { h: "三、热身朗读：Percy Buttons", type: "list", items: [
+        "课文梗概：刚搬到 Bridge Street 的作者，遇到乞丐 <span class='en'>Percy Buttons</span> 敲门要饭和啤酒，作为回报他倒立唱歌，还把一块奶酪放进口袋走了。邻居说他每个月都来这条街每家每户要一次。",
+        "课堂练习：<strong>用 3 句话总结故事</strong>。前两句话交代过程，最后一句要有“总结”作用，点出故事意味。",
+        "<span class='ok'>✓ A man named Percy Buttons knocked at the door and asked for a meal and a glass of beer. It wasn't the first time — actually, he always does this once a month in the street.</span>",
+        "<span class='why'>「不是第一次」= It wasn't the first time（过去式）；口语“实际上”用 <span class='b'>actually</span>（in fact 偏书面）。</span>",
+        "<span class='why'>💡 口语逻辑：不需要高级单词，把简单句按逻辑连起来、说得流利完整，就是好的口语。</span>",
+      ]},
+      { h: "四、核心语法：并列句", type: "list", items: [
+        "把简单的<strong>主谓宾 / 主系表</strong>句子用连接词串起来，就能流利描述一件事。口语流利的核心 = <span class='b'>单词量 + 会连接</span>。",
+        "<span class='b'>and</span>（然后、接着）/ <span class='b'>but</span>（但是）/ <span class='b'>so</span>（所以）。中文「然后/但是/所以」基本可以直接对应。",
+        "<div class='bbox'>主谓宾 / 主系表 <span class='b'>and</span> 主谓宾 / 主系表 <span class='b'>but</span> … <span class='b'>so</span> …</div>",
+        "<strong>节奏感</strong>：连接词反而要重读、稍作停顿，后面内容弱读连过去。前提是把单词读熟。",
+        "<div class='bbox en'>I'm currently an interior designer <span class='b'>and</span> she does dance studio store design in shopping malls. She originally worked in brand design <span class='b'>but</span> she stayed in the commercial space industry. Clients are not familiar with dance studio needs <span class='b'>so</span> she introduced the layout and lighting.</div>",
+      ]},
+      { h: "五、逐句翻译精讲", type: "list", items: [
+        "① Lucy 目前是一名室内设计师。<br><span class='en'>Lucy is an interior designer <span class='b'>right now / currently</span>.</span><br><span class='why'>不会 currently 时先用 right now 顶上；副词可放句首或句中。</span>",
+        "② 她在商场做舞蹈室门店设计。<br><span class='en'>She does dance studio store design in shopping malls.（合起来：She does <span class='b'>both</span> store and brand design for dance studios in shopping malls.）</span><br><span class='why'>英语先说“做什么设计”，地点放最后；“两者都”用 both。</span>",
+        "③ 她本来做品牌设计，但留在了商业空间行业。<br><span class='en'>She originally worked in brand design, <span class='b'>but</span> she stayed in the commercial space industry.</span><br><span class='no'>✗ she do brand design</span> <span class='why'>she 是三单 → does / worked</span>",
+        "④ 客户不熟悉舞蹈室的需求，所以她会介绍布局和灯光。<br><span class='en'>Clients are not familiar <span class='b'>with</span> dance studio needs, <span class='b'>so</span> she would introduce the layout and lighting.</span><br><span class='why'>familiar 是形容词 → 用 be 动词（are not）；形容词后接名词要用介词 with；需求 = demands / requirements。</span>",
+        "⑤ 她最近参观了几家门店，尤其喜欢简洁的氛围。<br><span class='en'>She has visited several mall stores <span class='b'>recently</span>, and she especially likes a simple atmosphere.</span><br><span class='no'>✗ the atmosphere of simple</span> → <span class='ok'>a simple atmosphere</span> <span class='why'>形容词直接修饰名词，不用 of</span>",
+        "⑥ 舞蹈室需要镜子，但灯光太多会不舒服。<br><span class='en'>A dance studio needs mirrors, <span class='b'>but</span> too many lights are not comfortable.</span><br><span class='no'>✗ lights too much</span> → <span class='ok'>✓ too many lights</span> <span class='why'>形容词放名词前；lights 可数用 too many。中文和英语语序不同，翻译时要转换。</span>",
+        "⑦ 这个布局对学生很方便，她向品牌推荐这个方案。<br><span class='en'>This layout is convenient <span class='b'>for</span> students, <span class='b'>so</span> she recommends this plan <span class='b'>to</span> the brand.</span><br><span class='why'>“对……方便”用 for 表目的/对象；“向某人推荐”用 to 表方向。</span>",
+        "⑧ 她本来向往品牌方向发展，但仍留在这个行业。<br><span class='en'>She wanted to develop <span class='b'>toward</span> the brand direction, but she stayed in this industry.</span><br><span class='why'>“朝……方向”的介词是 toward；“留在行业” = stay in the industry。</span>",
+        "⑨ 设计目的是展示品牌文化，让空间有独特感。<br><span class='en'>The purpose of design is <span class='b'>to</span> display the brand culture and <span class='b'>make</span> the space unique.</span><br><span class='no'>✗ the design propose is display…</span><br><span class='why'>①「设计的目的」= the purpose <span class='b'>of</span> design；② is 和 display 两个动词会“打架”，中间加 <span class='b'>to</span> 表目的；③ 让空间独特 = make + 宾语 + 形容词（同 make you happy）。</span>",
+        "⑩ 她很珍惜这个机会，希望以后能和国外设计师交流。<br><span class='en'>She appreciates this opportunity, and she hopes she can communicate with international designers <span class='b'>in the future</span>.</span><br><span class='why'>“以后/在未来” = in the future（最常用）；chance 偏“可能性”，opportunity 才是“机会”。</span>",
+      ]},
+      { h: "六、整段口语输出（跟读材料）", type: "list", items: [
+        "<div class='bbox en'>Lucy is currently an interior designer, and she does both store and brand design for dance studios in shopping malls. She originally worked in brand design — actually, she wanted to develop toward the brand direction, but she stayed in the commercial space industry. Clients are not familiar with dance studio needs, so she would introduce the layout and lighting. She has visited several mall stores recently, and she especially likes a simple atmosphere. She thinks a dance studio needs mirrors and a proper floor, but too many lights are not comfortable. The layout is convenient for students, so she recommends this plan to clients. She thinks the purpose of design is to display the brand culture and make the space unique. She appreciates this opportunity, and she hopes she can communicate with international designers in the future.</div>",
+        "<span class='why'>📌 练习方法：每天看着中文提示自己说一遍，再对照英文检查卡壳的地方。</span>",
+      ]},
+      { h: "七、本课纠错 Top 清单", type: "list", items: [
+        "三单：she <span class='b'>does / works</span>（不是 do）",
+        "过去式：<span class='en'>Did you have dinner?</span>（不是 Do）",
+        "familiar 是形容词：<span class='b'>be</span> familiar <span class='b'>with</span>，不能直接接名词",
+        "「太多灯光」：<span class='b'>too many lights</span>，形容词在前",
+        "「简洁的氛围」：<span class='b'>a simple atmosphere</span>，形容词直接修饰，不用 of",
+        "两个动词打架要加 <span class='b'>to</span>：is to display / need to do / want to develop",
+        "make + 宾语 + 形容词：make the space <span class='b'>unique</span> / make you <span class='b'>happy</span>",
+        "目的/对象用 <span class='b'>for</span>，方向用 <span class='b'>to</span>：convenient for students / recommend to clients",
+        "shall 只跟 I/we：<span class='en'>Shall we begin?</span>（没有 Shall you）",
+      ]},
+      { h: "八、口语金句", type: "list", items: [
+        "<span class='en'>I appreciate this opportunity.</span> —— 一个词 appreciate 秒杀 thank you",
+        "<span class='en'>Actually, he always does this.</span> —— actually = 口语“实际上”",
+        "<span class='en'>I stayed home all day.</span> —— 宅在家一整天",
+      ]},
+      { h: "课后作业", type: "homework", text: "① 每天单词打卡：把本课单词本里不熟的词标记出来反复读，坚持一个月；② 把第六部分整段输出练到流利；③ 坚持复习，2 个月后看到不一样的自己。" },
+    ],
+  },
+
+    /* ---------- 第 2 课 ---------- */
+  {
+    id: 2,
+    date: "2026-09-21",
+    title: "第二课：特殊疑问句——三步造出任何问句",
+    subtitle: "Mike 老师 · 课文热身 · 疑问词+助动词+主语 · how 大家族 · 场景实战",
+    tags: ["特殊疑问句", "how 大家族", "连读", "场景实战"],
+    sections: [
+      { h: "一、热身小词汇", type: "list", items: [
+        "「差不多」= <span class='en'>almost</span>。",
+        "一整天宅在家 = <span class='en'>stay at home</span>（stay at home 就是「宅在家」的意思，中英文常常可以直接对应）。",
+      ]},
+      { h: "二、热身朗读：A Private Conversation", type: "list", items: [
+        "课文梗概：作者上周去剧院看戏，座位很好、戏也很有趣，但身后一对年轻男女大声说话。作者生气地瞪他们，他们完全没注意（did not pay any attention）。最后作者忍无可忍（could not bear it），回头说「我一个字都听不见」，那男的粗鲁地回答：<span class='en'>It's none of your business. This is a private conversation.</span>",
+        "<span class='b'>It's none of your business.</span> = 不关你事。比较口语，语气重——很生气、要划清界限时才用。",
+        "<span class='en'>business</span> 这里是「事情、业务」的意思；<span class='en'>rudely</span> 粗鲁地（rude 粗鲁的 + ly）。",
+        "<span class='en'>bear</span> 作动词 = 承受。<span class='en'>I could not bear it.</span> = 我受不了了 / 忍无可忍。",
+        "关键句型：他们没有注意到我 = <span class='en'>They did not pay any attention.</span>（pay attention 注意）。",
+      ]},
+      { h: "三、核心语法：特殊疑问句三步造句", type: "list", items: [
+        "<strong>第①步 疑问词永远放第一</strong>：what 什么 / where 哪里 / who 谁 / why 为什么 / which 哪一种 / how 怎样。疑问词可以是好几个词组合（如 how many books）。",
+        "<strong>第②步 助动词</strong>：句子有实义动词就用 do / does / did（时态决定：过去时用 did）；描述「是什么、怎么样」的状态用 be 动词 am / is / are。",
+        "<strong>第③步 主语 + 动词</strong>：主语永远排第三；助动词后面动词用<strong>原形</strong>（What did you <span class='b'>do</span>?）。",
+        "<span class='why'>唯一例外：be 动词后面动词加 ing → <span class='en'>What are you doing?</span>（现在进行时，表示「你正在做什么」）。</span>",
+        "<div class='bbox'>疑问词 <span class='b'>+</span> 助动词（do/does/did 或 am/is/are）<span class='b'>+</span> 主语 <span class='b'>+</span> 动词原形…？</div>",
+        "课堂实例：<span class='no'>✗ What thing do you learn from the article?</span> → <span class='ok'>✓ What did you learn from this article?</span><br><span class='why'>中文没有「东西」就不用加 thing；learn 是实义动词且是过去式 → 用 did。</span>",
+      ]},
+      { h: "四、课堂造句练习", type: "list", items: [
+        "你今天做了什么？→ <span class='en'>What did you do today?</span>",
+        "哪一种音乐风格你最喜欢？→ <span class='en'>Which music style do you like the most?</span>（like the most 连读 most 别读成两个音）",
+        "你们项目负责人是谁？→ <span class='en'>Who is your project leader?</span>（project 项目 + leader 领导）",
+        "他们为什么会这样做？→ <span class='en'>Why do they do this?</span><br><span class='why'>一般现在时：描述一种习惯或现象（经常这样做），不是过去、也不是正在做，所以用 do。</span>",
+        "你昨天去哪里了？→ <span class='en'>Where did you go yesterday?</span>",
+        "你是怎么做到的？→ <span class='en'>How did you do it?</span>（「做到了」= 已经完成 → 过去式 did）",
+      ]},
+      { h: "五、how 大家族（how + 形容词问一切）", type: "list", items: [
+        "<span class='b'>how many</span> + 可数名词复数（books）；<span class='b'>how much</span> + 不可数名词（water / money——money 没有复数！）",
+        "how long 多久 / how often 多久一次 / how soon 还要多久 / how far 多远 / how high 多高（山）/ how tall 多高（人）/ how deep 多深 / how fast 多快 / how old 多大 / how big 多大",
+        "<strong>how 后面可以直接加形容词</strong>：<span class='en'>How beautiful is your sister?</span>（你妹妹有多美）/ <span class='en'>How bad is your boyfriend?</span>（你男朋友有多坏）/ How spicy is it?（多辣）",
+        "课堂练习：<span class='en'>How many books do you have? / How far is the station? / How long will you stay? / How old are you? / How big is your room? / How tall is he?</span>",
+        "<span class='why'>💡 描述「是什么 / 有多远 / 有多大」这种状态的问句用 be 动词：<span class='en'>How far is the station?</span> 而不是 do。</span>",
+      ]},
+      { h: "六、发音小贴士", type: "list", items: [
+        "<strong>连读</strong>：辅音 + 元音要连起来 → <span class='en'>bear it</span> 读成「bear-it」，<span class='en'>look at</span> 读成「loo-kat」。",
+        "<strong>ed 常常不发音</strong>：过去式 locked 在 <span class='en'>I looked at the man</span> 里，ed 基本不发出来；只有当这个过去式单词单独被强调时才发 ed 音。",
+        "不要太纠结传统拼读规则——口语以「顺」为目标，就像老外日常说话也不会一个字一个字拼。",
+        "<strong>音量放低一点、气息弱一点</strong>，反而说得更快更流利（Mike 的课堂提醒）。",
+        "注意 where /weə/ 的发音，别读成 well /wel/（课堂专门纠正过哦）。",
+      ]},
+      { h: "七、场景实战：问外国朋友四个问题", type: "list", items: [
+        "你想去哪里（玩）？→ <span class='en'>Where do you want to go?</span>",
+        "你想吃什么？→ <span class='en'>What food do you want (to eat)?</span>",
+        "你想什么时候起床出去玩？→ <span class='en'>When do you want to get up to play?</span>（get up 起床；wake up 只是醒来）",
+        "你觉得这个城市怎么样？→ <span class='en'>How do you think of this city?</span>",
+      ]},
+      { h: "课堂模拟对话", type: "dialog", lines: [
+        ["Lucy", "How do you think of this city?"],
+        ["Mike", "Well, I live in Shenzhen. I think it's a very beautiful and also very technology city. I really like this city atmosphere."],
+        ["Lucy", "When do you want to get up to play?"],
+        ["Mike", "Usually I will get up at six o'clock, but right now I want to get up at five a.m. because I want to see the sunrise."],
+        ["Lucy", "Where do you want to go?"],
+        ["Mike", "I want to go to the park — Talent Park."],
+        ["Lucy", "What kind of food do you like?"],
+        ["Mike", "Well, I like spicy food, you know."],
+      ]},
+      { h: "八、本课纠错 Top 清单", type: "list", items: [
+        "特殊疑问句不要加 thing：<span class='no'>✗ What thing…</span> → <span class='ok'>✓ What did you learn…?</span>",
+        "时态看助动词：过去的事用 <span class='b'>did</span>，动词变回原形。",
+        "描述习惯 / 现象用一般现在时：<span class='en'>Why do they do this?</span>",
+        "状态类问句用 be 动词：<span class='en'>How far is the station?</span>",
+        "money 不可数：只能用 <span class='b'>how much</span>，没有 moneys。",
+        "起床 = <span class='b'>get up</span>；wake up 只是「醒来」。",
+      ]},
+      { h: "课后作业", type: "homework", text: "用今天学的疑问词，每个造 2 个句子（不能和课堂上重复！），录一条语音发给老师。从明天开始坚持背单词，生词都会记在笔记里，可以随时回来复习。" },
+    ],
+  },
+
+/* ---------- 第 1 课（待更新） ---------- */
+  {
+    id: 1,
+    date: "—",
+    title: "第一课：笔记整理中",
+    subtitle: "等待老师上传课堂内容后更新",
+    tags: ["待更新"],
+    sections: [
+      { h: "本课笔记", type: "note", text: "这一课的课堂录音 / 逐字稿还没有发给我，老师补充后会把语法点、词汇、例句和跟读材料整理在这里。" },
+    ],
+  },
+
+  /* ★★★ 新课程粘贴在这一行的上方 ★★★ */
 ];
 
-/* ============================================================
-   ★ 单词卡数据区 ★  audio 字段可选：填仓库里的 mp3 路径
-   ============================================================ */
+/* ================================================================
+   ★★★ 单词本数据区 ★★★
+   格式：{ w:单词, p:音标, m:词性+中文, e:例句 }
+   新单词加在数组最前面即可。
+================================================================ */
 const WORDS = [
-  { w:"envelope", p:"/ˈenvələʊp/", m:"n. 信封", e:"Grab the red envelope!" },
-  { w:"grab", p:"/ɡræb/", m:"v. 抢；抓", e:"Grab red envelopes at the wedding." },
-  { w:"scenic", p:"/ˈsiːnɪk/", m:"adj. 风景优美的", e:"We visited many scenic spots." },
-  { w:"sightseeing", p:"/ˈsaɪtsiːɪŋ/", m:"n. 观光；游览", e:"sightseeing spots = 旅游景点" },
-  { w:"event", p:"/ɪˈvent/", m:"n. 活动；事件", e:"the new store opening event" },
-  { w:"coworker", p:"/ˈkəʊwɜːkə/", m:"n. 同事", e:"I will go with my coworker." },
-  { w:"teammate", p:"/ˈtiːmmeɪt/", m:"n. 队友；同事", e:"I went there with my teammate." },
-  { w:"spacious", p:"/ˈspeɪʃəs/", m:"adj. 宽敞的", e:"a spacious dancing practice area" },
-  { w:"ceiling", p:"/ˈsiːlɪŋ/", m:"n. 天花板；层高", e:"Is the ceiling height enough?" },
-  { w:"insulation", p:"/ˌɪnsjuˈleɪʃn/", m:"n. 隔音；隔热", e:"sound insulation design 隔音设计" },
-  { w:"adjust", p:"/əˈdʒʌst/", m:"v. 调整", e:"Could we adjust the size of the mirrors?" },
-  { w:"rendering", p:"/ˈrendərɪŋ/", m:"n. 效果图；渲染图", e:"Shall I show you the renderings?" },
-  { w:"finalize", p:"/ˈfaɪnəlaɪz/", m:"v. 敲定；定稿", e:"When do you expect to finalize the project?" },
-  { w:"feasibility", p:"/ˌfiːzəˈbɪləti/", m:"n. 可行性", e:"assess the feasibility of the material" },
-  { w:"handle", p:"/ˈhændl/", m:"v. 处理；负责", e:"Am I the right person to handle it?" },
-  { w:"supplier", p:"/səˈplaɪə/", m:"n. 供应商", e:"I negotiated with the supplier." },
-  { w:"negotiate", p:"/nɪˈɡəʊʃieɪt/", m:"v. 谈判；协商", e:"negotiate the project cost" },
-  { w:"bargain", p:"/ˈbɑːɡən/", m:"v. 讨价还价", e:"bargain with the supplier" },
-  { w:"takeout", p:"/ˈteɪkaʊt/", m:"n. 外卖", e:"I ordered milk tea by takeout." },
-  { w:"recommend", p:"/ˌrekəˈmend/", m:"v. 推荐", e:"Would you recommend this film to me?" },
-  { w:"uncomfortable", p:"/ʌnˈkʌmftəbl/", m:"adj. 不舒服的", e:"Three hours in the cinema is uncomfortable." },
-  { w:"mental", p:"/ˈmentl/", m:"adj. 精神的；心理的", e:"Do some mental preparation first." },
-  { w:"preparation", p:"/ˌprepəˈreɪʃn/", m:"n. 准备", e:"mental preparation 心理准备" }
+  { w:"almost", p:"/ˈɔːlməʊst/", m:"adv. 差不多", e:"I almost stayed home all day." },
+  { w:"theater", p:"/ˈθɪətə/", m:"n. 剧院、剧场", e:"I went to the theater last week." },
+  { w:"angrily", p:"/ˈæŋɡrəli/", m:"adv. 生气地", e:"I said it angrily." },
+  { w:"attention", p:"/əˈtenʃn/", m:"n. 注意", e:"They didn't pay any attention." },
+  { w:"private", p:"/ˈpraɪvət/", m:"adj. 私人的", e:"This is a private conversation." },
+  { w:"business", p:"/ˈbɪznəs/", m:"n. 业务、事情", e:"It's none of your business." },
+  { w:"rudely", p:"/ˈruːdli/", m:"adv. 粗鲁地", e:"The young man said rudely." },
+  { w:"bear", p:"/beə/", m:"v. 承受", e:"I could not bear it." },
+  { w:"actor", p:"/ˈæktə/", m:"n. 演员", e:"I could not hear the actors." },
+  { w:"conversation", p:"/ˌkɒnvəˈseɪʃn/", m:"n. 谈话", e:"a private conversation" },
+  { w:"project", p:"/ˈprɒdʒekt/", m:"n. 项目", e:"project leader 项目负责人" },
+  { w:"leader", p:"/ˈliːdə/", m:"n. 领导", e:"Who is your project leader?" },
+  { w:"sunrise", p:"/ˈsʌnraɪz/", m:"n. 日出", e:"I want to see the sunrise." },
+  { w:"spicy", p:"/ˈspaɪsi/", m:"adj. 辣的", e:"I like spicy food." },
+  { w:"tall", p:"/tɔːl/", m:"adj.（人）高的", e:"How tall is he?" },
+  { w:"deep", p:"/diːp/", m:"adj. 深的", e:"How deep is the river?" },
+  { w:"wake up", p:"/weɪk ʌp/", m:"醒来（≠ get up 起床）", e:"I wake up at six." },
+  { w:"interior", p:"/ɪnˈtɪəriə/", m:"adj. 室内的", e:"an interior designer" },
+  { w:"designer", p:"/dɪˈzaɪnə/", m:"n. 设计师", e:"She is an interior designer." },
+  { w:"design", p:"/dɪˈzaɪn/", m:"n./v. 设计", e:"store design" },
+  { w:"layout", p:"/ˈleɪaʊt/", m:"n. 布局", e:"the layout and lighting" },
+  { w:"currently", p:"/ˈkɜːrəntli/", m:"adv. 目前", e:"Lucy is currently an interior designer." },
+  { w:"originally", p:"/əˈrɪdʒənəli/", m:"adv. 原先、本来", e:"She originally worked in brand design." },
+  { w:"brand", p:"/brænd/", m:"n. 品牌", e:"brand culture 品牌文化" },
+  { w:"store", p:"stɔː/", m:"n. 门店", e:"mall stores 商场门店" },
+  { w:"mall", p:"/mɔːl/", m:"n. 商场", e:"shopping mall" },
+  { w:"space", p:"/speɪs/", m:"n. 空间", e:"commercial space industry" },
+  { w:"industry", p:"/ˈɪndəstri/", m:"n. 行业", e:"stay in this industry" },
+  { w:"client", p:"/ˈklaɪənt/", m:"n. 客户", e:"Clients are not familiar with it." },
+  { w:"familiar", p:"/fəˈmɪliə/", m:"adj. 熟悉的（be familiar with）", e:"Are you familiar with it?" },
+  { w:"demand", p:"/dɪˈmɑːnd/", m:"n. 需求", e:"dance studio needs / demands" },
+  { w:"introduce", p:"/ˌɪntrəˈdjuːs/", m:"v. 介绍", e:"She would introduce the layout." },
+  { w:"lighting", p:"/ˈlaɪtɪŋ/", m:"n. 灯光", e:"layout and lighting" },
+  { w:"mirror", p:"/ˈmɪrə/", m:"n. 镜子", e:"A dance studio needs mirrors." },
+  { w:"floor", p:"/flɔː/", m:"n. 地板", e:"a proper floor" },
+  { w:"proper", p:"/ˈprɒpə/", m:"adj. 合适的", e:"the proper floor（万能替代：right）" },
+  { w:"atmosphere", p:"/ˈætməsfɪə/", m:"n. 氛围", e:"a simple atmosphere" },
+  { w:"especially", p:"/ɪˈspeʃəli/", m:"adv. 尤其", e:"She especially likes it." },
+  { w:"simple", p:"/ˈsɪmpl/", m:"adj. 简洁的", e:"simple atmosphere" },
+  { w:"convenient", p:"/kənˈviːniənt/", m:"adj. 方便的", e:"convenient for students" },
+  { w:"recommend", p:"/ˌrekəˈmend/", m:"v. 推荐", e:"recommend this plan to clients" },
+  { w:"purpose", p:"/ˈpɜːpəs/", m:"n. 目的", e:"The purpose of design is to display…" },
+  { w:"display", p:"/dɪˈspleɪ/", m:"v. 展示", e:"display the brand culture" },
+  { w:"unique", p:"/juːˈniːk/", m:"adj. 独特的", e:"make the space unique" },
+  { w:"develop", p:"/dɪˈveləp/", m:"v. 发展", e:"develop toward the brand direction" },
+  { w:"direction", p:"/dəˈrekʃn/", m:"n. 方向", e:"toward this direction" },
+  { w:"communicate", p:"/kəˈmjuːnɪkeɪt/", m:"v. 交流", e:"communicate with designers" },
+  { w:"opportunity", p:"/ˌɒpəˈtjuːnəti/", m:"n. 机会", e:"I appreciate this opportunity." },
+  { w:"appreciate", p:"/əˈpriːʃieɪt/", m:"v. 感谢、欣赏", e:"I appreciate it." },
+  { w:"recently", p:"/ˈriːsntli/", m:"adv. 最近", e:"She has visited several stores recently." },
+  { w:"elegant", p:"/ˈelɪɡənt/", m:"adj. 优雅的", e:"an elegant style" },
+  { w:"material", p:"/məˈtɪəriəl/", m:"n. 材料", e:"wall materials" },
+  { w:"style", p:"/staɪl/", m:"n. 风格、款式", e:"casual style" },
+  { w:"trend", p:"/trend/", m:"n. 潮流", e:"the latest trend" },
+  { w:"casual", p:"/ˈkæʒuəl/", m:"adj. 休闲的", e:"casual clothes" },
+  { w:"match", p:"/mætʃ/", m:"v. 搭配", e:"They match well." },
+  { w:"prefer", p:"/prɪˈfɜː/", m:"v. 更喜欢", e:"I prefer simple styles." },
+  { w:"background", p:"/ˈbækɡraʊnd/", m:"n. 背景", e:"She has a design background." },
+  { w:"culture", p:"/ˈkʌltʃə/", m:"n. 文化", e:"brand culture" },
+  { w:"actually", p:"/ˈæktʃuəli/", m:"adv. 实际上（口语）", e:"Actually, he always does this." },
 ];
 
-/* ================= 语音引擎（女声优先） ================= */
+/* ================= 语音功能 ================= */
 let VOICES = [];
-const FEMALE_HINT = ['female','samantha','zira','victoria','karen','moira','tessa','fiona',
-  'aria','jenny','susan','allison','ava','serena','kate','stephanie','catherine','google uk english female'];
-const MALE_HINT = ['male','daniel','alex','fred','george','thomas','arthur','aaron','guy','james','david'];
-
-function refreshVoices(){
-  if(!('speechSynthesis' in window)) {
-    document.getElementById('voiceStatus').textContent = '⚠ 当前浏览器不支持语音合成，请用 Chrome / Edge / Safari 打开';
-    return;
-  }
+function loadVoices(){
   VOICES = speechSynthesis.getVoices();
-  const sel = document.getElementById('voiceSelect');
-  const saved = localStorage.getItem('lucy_voice');
-  const en = VOICES.filter(v => v.lang.toLowerCase().startsWith('en'));
-  sel.innerHTML = '';
-  if(!en.length){ sel.innerHTML = '<option value="">（暂无英文语音，点下方按钮刷新）</option>'; return; }
-  // 女声排前面
-  const score = v => {
-    const n = v.name.toLowerCase();
-    if(FEMALE_HINT.some(h => n.includes(h))) return 0;
-    if(MALE_HINT.some(h => n.includes(h))) return 2;
-    return 1;
-  };
-  en.sort((a,b) => score(a)-score(b));
-  en.forEach((v,i) => {
-    const o = document.createElement('option');
-    o.value = v.name;
-    o.textContent = (score(v)===0 ? '💃 ' : '   ') + v.name + ' (' + v.lang + ')';
+  const sel = document.getElementById("voiceSel");
+  sel.innerHTML = "";
+  const en = VOICES.filter(v=>/en(-|_)/i.test(v.lang));
+  en.forEach((v,i)=>{
+    const o = document.createElement("option");
+    o.value = VOICES.indexOf(v);
+    const female = /female|woman|zira|samantha|karen|moira|tessa|susan|hazel|google uk english female/i.test(v.name);
+    o.textContent = (female?"💃 ":"") + v.name + " (" + v.lang + ")";
     sel.appendChild(o);
-    if(saved && v.name === saved) sel.value = v.name;
+    if(female && !sel.dataset.picked){ sel.value = o.value; sel.dataset.picked = "1"; }
   });
-  if(!sel.value) sel.selectedIndex = 0; // 默认第一个（女声优先）
-  const def = en[VOICES.indexOf ? 0 : 0];
-  document.getElementById('voiceStatus').textContent =
-    '共 ' + en.length + ' 个英文声音，💃 为推荐女声（不同设备可选声音不同）';
+  if(!en.length) sel.innerHTML = "<option value=''>本设备暂无英文声音</option>";
 }
-if('speechSynthesis' in window){
-  refreshVoices();
-  speechSynthesis.onvoiceschanged = refreshVoices;
+if("speechSynthesis" in window){
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
 }
-function getVoice(){
-  const name = document.getElementById('voiceSelect').value;
-  return VOICES.find(v => v.name === name) || VOICES.find(v => v.lang.toLowerCase().startsWith('en'));
+function pickVoice(){
+  const i = +document.getElementById("voiceSel").value;
+  return VOICES[i] || null;
 }
-function saveVoice(){
-  localStorage.setItem('lucy_voice', document.getElementById('voiceSelect').value);
-  localStorage.setItem('lucy_rate', document.getElementById('rate').value);
-}
-function speak(text, btn, audioPath){
-  // ① 有真人录音 mp3 就优先播（GitHub 仓库可托管音频）
-  if(audioPath){
-    const a = new Audio(audioPath);
-    a.play().catch(() => ttsSpeak(text, btn));
-    return;
-  }
-  ttsSpeak(text, btn);
-}
-function ttsSpeak(text, btn){
-  if(!('speechSynthesis' in window)){ alert('当前浏览器不支持语音，请用 Chrome / Edge / Safari 打开'); return; }
+function speak(text){
+  if(!("speechSynthesis" in window)) return;
   speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  const v = getVoice();
-  if(v) u.voice = v;
-  u.lang = 'en-US';
-  u.rate = parseFloat(localStorage.getItem('lucy_rate') || document.getElementById('rate').value || 0.9);
-  if(btn){
-    btn.classList.add('on');
-    u.onend = u.onerror = () => btn.classList.remove('on');
-  }
+  const u = new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g,""));
+  u.lang = "en-US";
+  const v = pickVoice(); if(v) u.voice = v;
+  u.rate = parseFloat(document.getElementById("rateRange").value);
   speechSynthesis.speak(u);
 }
-function testVoice(){ speak('Hello, Lucy! Nice to meet you.', null); }
-function openVoiceSettings(){
-  refreshVoices();
-  document.getElementById('voiceMask').classList.add('show');
-}
-(function(){ // 恢复语速
-  const r = localStorage.getItem('lucy_rate');
-  if(r){ document.getElementById('rate').value = r; document.getElementById('rateVal').textContent = r; }
-})();
+document.getElementById("rateRange").addEventListener("input", e=>{
+  document.getElementById("rateVal").textContent = e.target.value;
+});
 
-/* ================= 页面逻辑 ================= */
-const listEl = document.getElementById('list');
-const detailEl = document.getElementById('detail');
-const emptyEl = document.getElementById('empty');
+/* ================= 页面渲染 ================= */
+const app = document.getElementById("app");
+function esc(s){ return s; }
 
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-function speakBtn(text){ return ` <button class="speak" onclick="event.stopPropagation();speak('${text.replace(/'/g,"\\'")}',this)">🔊 发音</button>`; }
-
-function renderList(filter=''){
-  listEl.innerHTML = '';
-  const kw = filter.trim().toLowerCase();
-  let shown = 0;
-  LESSONS.forEach(ls => {
-    const text = (ls.title + ls.subtitle + JSON.stringify(ls.sections)).toLowerCase();
-    if(kw && !text.includes(kw)) return;
-    shown++;
-    const card = document.createElement('div');
-    card.className = 'lesson-card';
-    card.innerHTML = `<div class="num">${ls.id}</div>
-      <div><div class="card-title">${esc(ls.title)}</div>
-      <div class="card-meta">${esc(ls.date)} · ${esc(ls.subtitle)}</div></div>
-      <div class="arrow">›</div>`;
-    card.onclick = () => showDetail(ls.id);
-    listEl.appendChild(card);
-  });
-  emptyEl.style.display = shown ? 'none' : 'block';
+function speakBtn(text){
+  return `<button class="speak" onclick="speak(this.dataset.t)" data-t='${text.replace(/'/g,"&#39;")}' title="朗读">🔊</button>`;
 }
 
-function sectionHTML(sec){
-  let body = '';
-  if(sec.type === 'list') body = '<ul>' + sec.items.map(i => `<li>${i}</li>`).join('') + '</ul>';
-  else if(sec.type === 'table') body = `<table><tr>${sec.head.map(h=>`<th>${h}</th>`).join('')}</tr>` +
-    sec.rows.map(r => '<tr>' + r.map(c => `<td>${c}${ /<span class='en'>([^<]+)<\/span>/.test(c) ? speakBtn(c.match(/<span class='en'>([^<]+)<\/span>/)[1]) : ''}</td>`).join('') + '</tr>').join('') + '</table>';
-  else if(sec.type === 'dialog') body = '<div class="dialog">' + sec.lines.map(l =>
-    `<p><span class="who">${esc(l[0])}:</span><span>${esc(l[1])}</span>${speakBtn(l[1])}</p>`).join('') + '</div>';
-  else if(sec.type === 'tip') body = `<div class="tip">💡 ${sec.text}</div>`;
-  else if(sec.type === 'homework') body = `<div class="homework">📌 ${sec.text}</div>`;
-  return `<div class="d-section"><h3>${sec.h}</h3>${body}</div>`;
-}
-
-function showDetail(id){
-  const ls = LESSONS.find(l => l.id === id);
-  if(!ls) return;
-  detailEl.innerHTML = `<button class="back" onclick="goBack()">‹ 返回课程列表</button>
-    <div class="d-title">${esc(ls.title)}</div>
-    <div class="d-meta">${esc(ls.date)} · ${esc(ls.subtitle)}</div>` +
-    (ls.intro ? `<div class="tip" style="margin-bottom:22px">📖 ${ls.intro}</div>` : '') +
-    ls.sections.map(sectionHTML).join('');
-  detailEl.classList.add('show');
-  listEl.style.display = 'none'; emptyEl.style.display = 'none';
-  document.querySelector('#page-lessons .toolbar').style.display = 'none';
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-function goBack(){
-  detailEl.classList.remove('show');
-  listEl.style.display = '';
-  document.querySelector('#page-lessons .toolbar').style.display = '';
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-document.getElementById('search').addEventListener('input', e => renderList(e.target.value));
-
-/* 单词卡 */
-function renderWords(){
-  const box = document.getElementById('cards');
-  box.innerHTML = '';
-  WORDS.forEach(item => {
-    const d = document.createElement('div');
-    d.className = 'flip';
-    d.innerHTML = `<div class="flip-inner">
-      <div class="face">
-        <div class="word">${esc(item.w)}</div>
-        <div class="phon">${esc(item.p)}</div>
-        <button class="speak" onclick="event.stopPropagation();speak('${item.w}',this${item.audio?`,'${item.audio}'`:''})">🔊 发音</button>
-        <div class="flip-hint">点击翻面看释义 →</div>
+function renderHome(){
+  document.querySelector('[data-nav="home"]').classList.add("on");
+  const sorted = [...LESSONS].sort((a,b)=>b.id-a.id);
+  const done = LESSONS.filter(l=>l.tags[0]!=="待更新").length;
+  app.innerHTML = `
+    <div class="hero">
+      <div class="hello">EVERYDAY ENGLISH</div>
+      <h1>Lucy 的英语复习站</h1>
+      <p>每节课的笔记都整理在这里，点 🔊 随时跟读。</p>
+      <div class="chips">
+        <div class="chip">已更新 <b>${done}</b> 节课</div>
+        <div class="chip">坚持复习</div>
+        <div class="chip"><b>2 个月后</b>看到不一样的自己 ✨</div>
       </div>
-      <div class="face back">
-        <div class="meaning">${esc(item.m)}</div>
-        <div class="example">${esc(item.e)}</div>
-        <button class="speak" onclick="event.stopPropagation();speak('${item.e.replace(/'/g,"\\'")}',this)">🔊 读例句</button>
-      </div>
+    </div>
+    <div class="lesson-grid">
+      ${sorted.map(l=>`
+        <a class="lesson-card ${l.tags[0]==="待更新"?"soon":""}" href="#/lesson/${l.id}">
+          <div class="top-row"><span class="no">第 ${l.id} 课</span><span class="date">${l.date}</span></div>
+          <h2>${l.title}</h2>
+          <div class="sub">${l.subtitle}</div>
+          <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+        </a>`).join("")}
     </div>`;
-    d.onclick = () => d.classList.toggle('flipped');
-    box.appendChild(d);
-  });
-}
-function shuffleWords(){
-  for(let i=WORDS.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [WORDS[i],WORDS[j]]=[WORDS[j],WORDS[i]]; }
-  renderWords();
 }
 
-/* 页签切换 */
-function switchTab(tab){
-  document.getElementById('tab-lessons').classList.toggle('active', tab==='lessons');
-  document.getElementById('tab-words').classList.toggle('active', tab==='words');
-  document.getElementById('page-lessons').style.display = tab==='lessons' ? '' : 'none';
-  document.getElementById('page-words').style.display = tab==='words' ? '' : 'none';
-  if(tab==='lessons') goBack();
-  window.scrollTo({top:0});
+function renderLesson(id){
+  const l = LESSONS.find(x=>x.id===id);
+  if(!l){ location.hash = "#/"; return; }
+  const sorted = [...LESSONS].sort((a,b)=>a.id-b.id);
+  const idx = sorted.findIndex(x=>x.id===id);
+  const prev = sorted[idx-1], next = sorted[idx+1];
+  app.innerHTML = `
+    <div class="lesson-head">
+      <div class="crumb"><a href="#/">首页</a> / 第 ${l.id} 课</div>
+      <h1>${l.title}</h1>
+      <div class="meta">${l.date} · ${l.subtitle}</div>
+      <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+    </div>
+    ${l.audio?`<div class="hw" style="margin-top:14px;">🎧 本课录音：<audio controls src="${l.audio}" style="width:100%;margin-top:6px;"></audio></div>`:""}
+    ${l.sections.map(sec=>{
+      let body = "";
+      if(sec.type==="list"){
+        body = "<ul>" + sec.items.map(it=>{
+          const m = it.match(/<span class='en'>([\s\S]*?)<\/span>/);
+          return `<li>${it}${m?speakBtn(m[1]):""}</li>`;
+        }).join("") + "</ul>";
+      }else if(sec.type==="dialog"){
+        body = `<div class="dialog">` + sec.lines.map(([who,text])=>`
+          <div class="line ${who==="Lucy"?"lucy":"mike"}">
+            <span class="who">${who}</span>
+            <span class="msg en">${text}${speakBtn(text)}</span>
+          </div>`).join("") + "</div>";
+      }else if(sec.type==="homework"){
+        body = `<div class="hw">📝 ${sec.text}</div>`;
+      }else{
+        body = `<p>${sec.text||""}</p>`;
+      }
+      return `<section class="sec"><h2>${sec.h}</h2>${body}</section>`;
+    }).join("")}
+    <div class="pager">
+      ${prev?`<a href="#/lesson/${prev.id}">← 上一课<small>第 ${prev.id} 课</small></a>`:`<a href="#/">← 返回首页</a>`}
+      <a href="#/">课程总览<small>所有课时</small></a>
+      ${next?`<a href="#/lesson/${next.id}">下一课 →<small>第 ${next.id} 课</small></a>`:`<a href="#/">回到首页 →</a>`}
+    </div>`;
+  window.scrollTo(0,0);
 }
-function openHelp(){ document.getElementById('mask').classList.add('show'); }
 
-renderList();
-renderWords();
+function renderWords(){
+  document.querySelector('[data-nav="words"]').classList.add("on");
+  app.innerHTML = `
+    <div class="lesson-head">
+      <div class="crumb"><a href="#/">首页</a> / 单词本</div>
+      <h1>单词本 <small style="font-size:13px;color:var(--muted);font-weight:400;">（点击卡片朗读 · 共 ${WORDS.length} 词）</small></h1>
+    </div>
+    <div class="word-grid">
+      ${WORDS.map(w=>`
+        <div class="word-card" onclick="speak('${w.w}')">
+          <div class="w">${w.w} ${speakBtn(w.w)}</div>
+          <div class="p">${w.p}</div>
+          <div class="m">${w.m}</div>
+          <div class="e">${w.e}</div>
+        </div>`).join("")}
+    </div>`;
+}
+
+/* ================= 路由 ================= */
+function route(){
+  document.querySelectorAll("[data-nav]").forEach(a=>a.classList.remove("on"));
+  const h = location.hash || "#/";
+  const m = h.match(/^#\/lesson\/(\d+)/);
+  if(m){ renderLesson(+m[1]); }
+  else if(h==="#/words"){ renderWords(); }
+  else{ renderHome(); }
+}
+window.addEventListener("hashchange", route);
+route();
 </script>
 </body>
 </html>
