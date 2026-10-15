@@ -197,6 +197,25 @@ footer{padding:22px 0;text-align:center;color:var(--muted);font-size:12px;}
 
 const LESSONS = [
   {
+    id: 5,
+    date: "2026-10-15",
+    title: "第五课：口语演讲实战",
+    subtitle: "Not only...but also 强化 + 1分钟主题演讲",
+    tags: ["已更新", "演讲", "not only but also"],
+    sections: [
+      { h:"课程概览", type:"list", items:["<b>复习</b>：点咖啡 + 酒店入住对话","<b>核心语法</b>：Not only...but also 强化训练","<b>公司介绍</b>：完整版室内设计公司介绍（带 not only but also）","<b>演讲练习 A</b>：Describe your holiday（描述假期——扬州）","<b>演讲练习 B</b>：Describe your hometown（介绍家乡——邢台）"] },
+      { h:"复习：点咖啡对话", type:"dialog", lines:[["Lucy","Can I get a cup of latte?"],["Lucy","Can I get the menu? Do you have some recommendation?"],["Lucy","Can I get a large size coffee?"],["Lucy","Would you like some sugar?"],["Lucy","For here or take away?"],["Lucy","Can I pay by card?"],["Lucy","Can I get the bill, please?"]] },
+      { h:"复习：酒店入住对话", type:"dialog", lines:[["Lucy","I have a reservation. We are under one name."],["Lucy","Please show your passport."],["Lucy","Here is your key card."],["Lucy","One double room for two days. Is breakfast included?"],["Lucy","What time is check out?"],["Lucy","Can I have a wake-up call at 7 a.m.?"],["Lucy","Room 305 on the floor three."]] },
+      { h:"公司介绍完整版", type:"list", items:["<span class='en'>We can do interior design for dance studio.</span>","<span class='en'>We have served overseas clients.</span>","<span class='en'>We have eight years design experience, but we never use fixed templates to create plans.</span>","<span class='en'>We understand dancers' special needs like floor, space, voice and lights.</span>","<span class='en'>So many dancers believe us.</span>","<span class='en'>Our plan not only can be safe and functional, but also have amazing visual.</span>","<span class='en'>The clients who choose us can get a complete one-stop design solution.</span>","<span class='en'>If you cooperate with us, you can get a full-process design service.</span>"] },
+      { h:"Not only...but also 造句强化", type:"list", items:["<span class='en'>Our design not only can be safe, but also have amazing visual.</span>","<span class='en'>We not only provide space designing, but also apply professional advice about dance floor.</span>","<span class='en'>Our team not only can do 2D drawings, but also can create 3D renderings for you.</span>","<span class='en'>The dance studio we create not only is functional, but also is good for taking photos.</span>","<span class='en'>We not only respect your budget, but also value dancers' user experience.</span>"] },
+      { h:"演讲 A：描述假期（扬州）", type:"list", items:["<b>开头</b>：<span class='en'>I'd like to talk about my last holiday.</span>","<b>行程</b>：<span class='en'>I went to Yangzhou with my husband by car for seven days.</span>","<b>体验1·扬州炒饭</b>：<span class='en'>Do you know Yangzhou fried rice is very famous in China? But when I tried it, I was so disappointed because the smell was not good.</span>","<b>体验2·搓背</b>：<span class='en'>After that, I tried another local custom — Yangzhou back massage. It is not only comfortable, but also made me relaxed and happy.</span>","<b>城市特点</b>：<span class='en'>Yangzhou is a second-tier city. It has different culture, especially in garden design. It's very elegant and amazing.</span>","<b>对比</b>：<span class='en'>Comparing with first-tier cities like Shanghai and Beijing, Yangzhou is a very relaxed city.</span>","<b>结尾</b>：<span class='en'>So I really want to recommend this city to you.</span>"] },
+      { h:"演讲 B：介绍家乡（邢台）", type:"list", items:["<b>开头</b>：<span class='en'>I'd like to talk about my hometown.</span>","<b>基本信息</b>：<span class='en'>My hometown is Xingtai City. It has a long history and with little space. It has many delicious food with typical northern characteristics.</span>","<b>离开家乡</b>：<span class='en'>But I left my hometown when I went to university. So I feel stranger about my hometown when I grow up.</span>","<b>现在城市</b>：<span class='en'>Now I have adapted Beijing that has fast pace.</span>","<b>转折</b>：<span class='en'>But I still think my hometown has warm atmosphere for me.</span>","<b>建议</b>：<span class='en'>So if you decide to stay in a first-tier city when you graduate, it's a very good decision.</span>","<b>上高度</b>：<span class='en'>And our aim is to contribute our hometown using work experience.</span>"] },
+      { h:"演讲技巧 Tips", type:"list", items:["<b>框架感</b>：开头 → 经历/事实 → 转折/对比 → 感受 → 结尾推荐/上高度","<b>用问句</b>：<span class='en'>Do you know...?</span> 增加互动感","<b>用连接词</b>：but, so, not only...but also, after that, comparing with","<b>描述时间</b>：since, after, before 让叙述更有前后顺序","<b>不知道怎么说时</b>：想简单表达，判断好/坏事 → good for / bad for","<b>结尾上高度</b>：用第二/三人称（if you...）让观点更客观、更有价值感"] },
+      { h:"作业", type:"homework", text:"1. 每天背诵公司介绍完整版（8句话）\n2. 用 Not only...but also 造5个跟自己工作相关的句子\n3. 准备1分钟演讲：描述你的一次旅行经历（框架：开头→行程→体验→对比→推荐）\n4. 准备1分钟演讲：介绍你的家乡（框架：基本信息→离开原因→现在对比→感受→建议/上高度）" },
+    ],
+  },
+
+  {
     id: 4,
     date: "2026-10-11",
     title: "第四课：场景实战——点咖啡、酒店入住、介绍公司",
@@ -265,6 +284,33 @@ const LESSONS = [
 
 
 const WORDS = [
+  { w:"disappointed", p:"/ˌdɪsəˈpɔɪntɪd/", m:"adj. 失望的", e:"I was so disappointed." },
+  { w:"custom", p:"/ˈkʌstəm/", m:"n. 习俗，习惯", e:"The back massage is a local custom in Yangzhou." },
+  { w:"comfortable", p:"/ˈkʌmftəbl/", m:"adj. 舒服的", e:"It is not only comfortable but also relaxing." },
+  { w:"recommend", p:"/ˌrekəˈmend/", m:"v. 推荐", e:"I really want to recommend this city to you." },
+  { w:"especially", p:"/ɪˈspeʃəli/", m:"adv. 尤其，特别", e:"Especially for garden design." },
+  { w:"elegant", p:"/ˈelɪɡənt/", m:"adj. 优雅的，精致的", e:"It's very elegant and amazing." },
+  { w:"compare", p:"/kəmˈpeə(r)/", m:"v. 比较", e:"Comparing with first-tier cities..." },
+  { w:"tier", p:"/tɪə(r)/", m:"n. 等级，层级", e:"second-tier city 二线城市" },
+  { w:"stranger", p:"/ˈstreɪndʒə(r)/", m:"n. 陌生人；感到陌生的", e:"I feel stranger about my hometown." },
+  { w:"adapt", p:"/əˈdæpt/", m:"v. 适应", e:"I have adapted the fast pace in Beijing." },
+  { w:"pace", p:"/peɪs/", m:"n. 节奏，步伐", e:"fast pace 快节奏" },
+  { w:"atmosphere", p:"/ˈætməsfɪə(r)/", m:"n. 氛围，气氛", e:"warm atmosphere 温暖的氛围" },
+  { w:"contribute", p:"/kənˈtrɪbjuːt/", m:"v. 贡献", e:"contribute to your hometown" },
+  { w:"aim", p:"/eɪm/", m:"n. 目标", e:"Our aim is to contribute our city." },
+  { w:"solution", p:"/səˈluːʃn/", m:"n. 解决方案", e:"a complete one-stop design solution" },
+  { w:"process", p:"/ˈprəʊses/", m:"n. 过程", e:"full-process design service" },
+  { w:"rendering", p:"/ˈrendərɪŋ/", m:"n. 渲染图，效果图", e:"3D renderings" },
+  { w:"professional", p:"/prəˈfeʃənl/", m:"adj. 专业的", e:"professional advice" },
+  { w:"budget", p:"/ˈbʌdʒɪt/", m:"n. 预算", e:"respect your budget" },
+  { w:"value", p:"/ˈvæljuː/", m:"v. 重视；n. 价值", e:"We value dancers' user experience." },
+  { w:"visual", p:"/ˈvɪʒuəl/", m:"adj. 视觉的", e:"amazing visual" },
+  { w:"functional", p:"/ˈfʌŋkʃənl/", m:"adj. 实用的，功能的", e:"safe and functional" },
+  { w:"experience", p:"/ɪkˈspɪəriəns/", m:"n. 经验，体验", e:"user experience / work experience" },
+  { w:"cooperate", p:"/kəʊˈɒpəreɪt/", m:"v. 合作", e:"If you cooperate with us..." },
+  { w:"overseas", p:"/ˌəʊvəˈsiːz/", m:"adj. 海外的", e:"overseas clients" },
+  { w:"template", p:"/ˈtempleɪt/", m:"n. 模板", e:"fixed template" },
+
   { w:"latte", p:"/ˈlɑːteɪ/", m:"n. 拿铁", e:"I want to get a middle size latte." },
   { w:"espresso", p:"/eˈspresəʊ/", m:"n. 浓缩咖啡", e:"an espresso" },
   { w:"americano", p:"/əˌmerɪˈkɑːnəʊ/", m:"n. 美式咖啡", e:"a hot americano" },
