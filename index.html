@@ -196,6 +196,26 @@ footer{padding:22px 0;text-align:center;color:var(--muted);font-size:12px;}
 ================================================================ */
 
 const LESSONS = [
+
+  {
+    id: 8,
+    date: "2026-10-28",
+    title: "第八课：主题演讲——我最好的朋友",
+    subtitle: "Mike 老师 · 半英半中抠细节 · 友谊话题 · 过渡句与上价值",
+    tags: ["已更新", "演讲", "友谊话题", "定语从句", "过渡句"],
+    sections: [
+      { h:"一、热身闲聊：又是加班的一天", type:"list", items:["最近天天加班：<span class='en'>I got overtime day by day.</span>（day by day = 每一天都这样）","刚刚到家：<span class='en'>I just got back home.</span>","表达情绪可以更口语化：<span class='en'>I'm so busy!</span> 语气加重、加情绪词，比平铺直叙更地道。","本课模式：<span class='b'>半英半中抠细节</span>——一节课全英、一节课半英半中交替，慢慢建立英语思维。"] },
+      { h:"二、话题：Who is your best friend?", type:"list", items:["Lucy 的素材：最好的朋友是<span class='b'>高中同学</span>，上周刚一起吃了火锅、在家打了麻将。","从高中到工作一直互相陪伴：<span class='en'>from high school to work</span>","大学在同一城市，现在又在同一城市工作：<span class='en'>We studied in the same city for university, and now we also work in the same city.</span>","注意：<span class='no'>✗ in a same city</span> → <span class='ok'>✓ in the same city</span> <span class='why'>same 前面要加 the。</span>"] },
+      { h:"三、核心词汇：性格描述", type:"list", items:["性格 <span class='b'>personality</span>（person 个人 + al 形容词 → 再加 ty 变名词）","互补：口语说 <span class='en'>our personalities match well</span>（match 匹配 + well 程度）；书面语 complement","细腻 <span class='b'>delicate</span>：<span class='en'>She has a delicate personality.</span>","考虑周全 <span class='en'>thinks things through</span>（through = 看透、想透）","直白 <span class='b'>straightforward</span>（一个词，straight 直 + forward 向前）","相处舒服：<span class='en'>We feel really comfortable staying with each other.</span> <span class='why'>两个动词连用，第二个加 ing：feel comfortable + staying。</span>"] },
+      { h:"四、语法点：主系表 vs 主谓宾", type:"list", items:["判断方法：是在<strong>形容</strong>主语，还是主语发生了<strong>动作</strong>？","「我是比较直白的」是形容 → 主系表 → 要加 be 动词：<span class='no'>✗ I pretty straightforward</span> → <span class='ok'>✓ I am pretty straightforward.</span>","转折用 <span class='b'>while</span>（然而）：<span class='en'>She has a delicate personality and thinks things through, while I am pretty straightforward.</span>","中英文切换时先判断句型，动词才不会用错。"] },
+      { h:"五、上价值：讲一个具体的故事", type:"list", items:["Mike 提醒：前面性格描述比较笼统，演讲要<span class='b'>加一件具体的小事</span>。","Lucy 的故事：一次高中考试成绩不理想 → 哭了 → 觉得自己笨、学不会 → 朋友开导、鼓励、帮她讲功课。","翻译精讲：","我记得有一次 → <span class='en'>I remember once.</span>（比 one time 更简洁）","成绩不理想 → <span class='en'>I got a bad grade in a high school exam.</span>（英语先说重点；grade 成绩）","fail 是不及格，程度太重，不理想用 <span class='b'>bad grade</span> 更准","我哭了，觉得自己很笨、学不会 → <span class='en'>I cried and I thought I was stupid and couldn't learn it.</span> <span class='why'>过去的事：thought / was / couldn't。</span>","开导 → <span class='b'>comfort</span>（形容词 comfortable 去掉 able 变动词，使人舒服）","鼓励 → <span class='b'>encourage</span>（inspire 激励语气更狠，encourage 更温柔）","帮我讲功课 → <span class='en'>helped me with my lessons</span>（help sb. with sth.）","程度副词别丢：<span class='en'>encouraged me a lot</span>"] },
+      { h:"六、过渡与收尾技巧", type:"list", items:["万能转折词 <span class='b'>anyway</span>（总之、反正）：讲完分歧后自然引回主题——<span class='en'>Anyway, she is my best friend.</span>","求助/感谢表达：<span class='en'>She gave me a hand when I needed help.</span>（give me a hand 帮我一把）","结尾许愿：<span class='en'>If possible, I hope we can be best friends forever.</span>（if possible 如果可能的话）","单字反驳技巧：表达强烈立场时直接说一个词——<span class='en'>Impossible!</span> 根本不可能！","有分歧：<span class='en'>We also have different opinions.</span>（opinion 意见）"] },
+      { h:"七、八卦实战：朋友的恋爱分歧（定语从句复习）", type:"list", items:["例如 for example：<span class='en'>Her boyfriend is a South person.</span>（南方人；north 北 / south 南 / east 东 / west 西）","复杂版（定语从句）：<span class='en'>The boyfriend who she has a relationship with is a South person.</span>（relationship 关系）","想太多：<span class='b'>overthinking</span>（over + thinking）→ <span class='en'>She keeps overthinking about it.</span>（keep + doing 一直做）","担心南北文化差异：<span class='en'>She worries about the culture difference between South and North.</span> <span class='why'>difference 名词差异；different 是形容词。</span>","Lucy 的观点：<span class='en'>I think it doesn't matter if they love each other.</span>（只要相爱就没问题）","Mike 点评：用英语聊八卦特别好——<span class='why'>八卦是最好的语言素材，人人都爱讲。</span>"] },
+      { h:"八、演讲完整版（跟读材料）", type:"list", items:["<div class='bbox en'>My best friend is my high school classmate. We studied in the same city for university, and now we also work in the same city. I think our personalities match well — she has a delicate personality and thinks things through, while I am pretty straightforward, so we feel really comfortable staying with each other.<br><br>But we also have different opinions. For example, her boyfriend is a South person, and she keeps overthinking about the culture difference between South and North. But I think it doesn't matter if they love each other.<br><br>Anyway, she is my best friend. She gave me a hand when I needed help. I remember once I got a bad grade in a high school exam — I cried and thought I was stupid and couldn't learn it. She comforted me and encouraged me a lot, and helped me with my lessons. If possible, I hope we can be best friends forever.</div>","<span class='why'>📌 练习方法：先逐段抠熟 → 只看中文说 → 脱稿自由发挥。不要 100% 复述，加入自己想说的内容。</span>"] },
+      { h:"九、口语技巧小结", type:"list", items:["<b>卡壳就重来</b>：口语练习不怕错，重说一遍即可","<b>语调口语化</b>：假装在说话而不是在读稿","<b>内容做加法</b>：基础版完成后，延伸 1-2 件别的事（工作、分歧、小故事）","<b>自然过渡</b>：anyway / but / for example / I remember once","<b>下节课预告</b>：全英模式，减少老师干涉，自己组织语言"] },
+      { h:"作业", type:"homework", text:"1. 把「我最好的朋友」演讲练到脱稿：先抠细节逐句过，再自由发挥加入自己的内容\n2. 用性格词汇描述一位你身边的朋友：personality / delicate / straightforward / match well\n3. 练 3 个过渡句：Anyway… / For example… / I remember once…\n4. 预习全英模式：试着不看任何提示讲 1 分钟你的朋友" },
+    ],
+  },
   {
     id: 6,
     date: "2026-10-21",
@@ -323,6 +343,26 @@ const LESSONS = [
 
 
 const WORDS = [
+
+  { w:"personality", p:"/ˌpɜːsəˈnæləti/", m:"n. 性格", e:"She has a delicate personality." },
+  { w:"delicate", p:"/ˈdelɪkət/", m:"adj. 细腻的", e:"She has a delicate personality." },
+  { w:"straightforward", p:"/ˌstreɪtˈfɔːwəd/", m:"adj. 直白的", e:"I am pretty straightforward." },
+  { w:"match", p:"/mætʃ/", m:"v. 匹配、互补", e:"Our personalities match well." },
+  { w:"comfort", p:"/ˈkʌmfət/", m:"v. 开导；n. 安慰", e:"She comforted me when I failed." },
+  { w:"encourage", p:"/ɪnˈkʌrɪdʒ/", m:"v. 鼓励", e:"She encouraged me a lot." },
+  { w:"grade", p:"/ɡreɪd/", m:"n. 成绩", e:"I got a bad grade in the exam." },
+  { w:"fail", p:"/feɪl/", m:"v. 不及格", e:"fail the exam（程度比 bad grade 重）" },
+  { w:"stupid", p:"/ˈstjuːpɪd/", m:"adj. 笨的", e:"I thought I was stupid." },
+  { w:"impossible", p:"/ɪmˈpɒsəbl/", m:"adj. 不可能的", e:"Impossible! 根本不可能！" },
+  { w:"opinion", p:"/əˈpɪnjən/", m:"n. 意见", e:"We have different opinions." },
+  { w:"overthink", p:"/ˌəʊvəˈθɪŋk/", m:"v. 想太多", e:"She keeps overthinking about it." },
+  { w:"difference", p:"/ˈdɪfrəns/", m:"n. 差异", e:"the culture difference between South and North" },
+  { w:"relationship", p:"/rɪˈleɪʃnʃɪp/", m:"n. 关系", e:"have a relationship with sb." },
+  { w:"anyway", p:"/ˈeniweɪ/", m:"adv. 总之、反正", e:"Anyway, she is my best friend." },
+  { w:"give me a hand", p:"/ɡɪv mi ə hænd/", m:"帮我一把", e:"She gave me a hand when I needed help." },
+  { w:"mahjong", p:"/ˌmɑːˈʒɒŋ/", m:"n. 麻将", e:"play mahjong at my home" },
+  { w:"hotpot", p:"/ˈhɒtpɒt/", m:"n. 火锅", e:"We ate hotpot last weekend." },
+  { w:"south / north", p:"/saʊθ nɔːθ/", m:"南方 / 北方", e:"He is a South person." },
   { w:"overwork", p:"/ˌəʊvəˈwɜːk/", m:"v./n. 加班", e:"I overworked last week." },
   { w:"check in", p:"/ˌtʃek ˈɪn/", m:"phr. 检票，登记", e:"I was checking tickets at the event." },
   { w:"register", p:"/ˈredʒɪstə(r)/", m:"v. 注册，报名", e:"On-site registration 现场报名" },
