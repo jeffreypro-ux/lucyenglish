@@ -198,6 +198,25 @@ footer{padding:22px 0;text-align:center;color:var(--muted);font-size:12px;}
 const LESSONS = [
 
   {
+    id: 9,
+    date: "2026-11-01",
+    title: "第九课：演讲追问——我最看重的品质",
+    subtitle: "全英对话 Assessment · qualities I value most · 观点+解释+感受",
+    tags: ["已更新", "全英", "演讲", "品质话题", "there be"],
+    sections: [
+      { h:"一、热身闲聊：睡过头的早晨", type:"list", items:["Lucy 早上睡过头了，上课差点迟到：<span class='en'>I overslept. Sorry I'm late.</span>（oversleep 睡过头）","本课进入<span class='b'>全英对话 Assessment 模式</span>：纯英文问答，老师逐句追问、抠细节。"] },
+      { h:"二、上节复习：Best Friend 演讲", type:"list", items:["Lucy 不看笔记完整复述了第八课的「我最好的朋友」演讲 ✅","Mike 点评：记性很好，语感不错，基础扎实","复习策略：每节课开头复述上节内容，保持肌肉记忆"] },
+      { h:"三、话题：What qualities do you value most in friendship?", type:"list", items:["Mike 追问：<span class='en'>What qualities do you value most in this friendship?</span>","Lucy 的观点：<span class='b'>责任心</span> + <span class='b'>分寸感</span>","答题套路：<span class='why'>先抛观点 → 再解释原因 → 最后加主观感受</span>（事实 + 感受 = 有活人感）"] },
+      { h:"四、观点句式：There be + 定语从句", type:"list", items:["核心句式：<span class='en'>There are two qualities I value most in my best friend.</span>","<span class='b'>value</span> 作动词 = 重视、看重（名词 value 价值 → 动词化）","<span class='en'>I value most</span> 是定语从句（省略了 that），修饰 qualities","There are = 「有」的陈述句型，先总说数量再展开"] },
+      { h:"五、品质一：责任心 a sense of responsibility", type:"list", items:["名词组要加冠词：<span class='en'>a sense of responsibility</span>（一种…的感觉）","加强语气：<span class='en'>a stronger sense of responsibility</span>（更强的责任心，画面感更足）","原因解释：<span class='en'>because friends often hang out together or try new unknown things.</span>","<span class='b'>hang out</span> 出去玩、瞎逛（比 play together 更地道）","<span class='b'>unknown</span> 未知的（know + no → un 否定前缀）","加主观感受：<span class='en'>I really like this.</span> <span class='why'>论点之后补一句感受，演讲才有「活人感」。</span>","状语从句收尾：<span class='en'>If without a sense of responsibility, she might get late or fail to go as planned.</span>","<span class='b'>might</span> 可能（can 太绝对）；<span class='b'>fail to do</span> 没能做成某事；<span class='b'>as planned</span> 按计划","现学现用：<span class='en'>I fail to get up early.</span>（我没能早起）"] },
+      { h:"六、品质二：分寸感 a sense of boundaries", type:"list", items:["<span class='en'>Second, a sense of boundaries.</span>（boundary 边界/界限）","金句：<span class='en'>A good friend doesn't mean without personal privacy.</span>","<span class='why'>三单：good friends <span class='no'>✗ don't mean</span> → <span class='ok'>✓ doesn't mean</span>；without = 没有（比 don't have 更高级）。</span>","隐私 <span class='b'>privacy</span>（private 私人的 → privacy 名词隐私）","看破不说破：<span class='en'>I hope we both know each other's baseline.</span>（底线 baseline）","收尾升华：<span class='en'>So we can respect each other and go on stably.</span>","<span class='b'>stably</span> 稳定地（stable 形容词 + ly）；<span class='b'>constantly</span> 一直、持续地"] },
+      { h:"七、演讲完整版（跟读材料）", type:"list", items:["<div class='bbox en'>I think there are two qualities I value most in a good friend. First, a sense of responsibility — because friends often hang out together or try new unknown things, and I really like this. If without a sense of responsibility, she might get late or fail to go as planned. Second, a sense of boundaries. A good friend doesn't mean without personal privacy — I hope we both know each other's baseline, so we can respect each other and go on stably.</div>","<span class='why'>📌 练习方法：按「观点 → 解释 → 感受」三段式说，再脱稿换自己的品质（如 honest / humorous）练一遍。</span>"] },
+      { h:"八、学习反馈：视频复盘 📹", type:"list", items:["Mike 用 AI 剪辑了 Lucy 的演讲视频发给学员复盘","Lucy 的反馈：能直观听到自己的发音，发现自己<span class='b'>特别喜欢停顿、磨叽、打磕巴</span>","Mike 建议：多练表达和<b>语序调换</b>——练熟了就能随口说，不用现想","把会的多种表达交替用出来，而不是只用一招"] },
+      { h:"作业", type:"homework", text:"1. 练熟「我最看重的品质」演讲，按观点→解释→感受三段式脱稿说\n2. 换 2 个你自己的品质（如 honest / patient / humorous），用同样句式各说一遍\n3. 用 fail to do 造 3 个句子（如 I fail to get up early）\n4. 继续交作业：每天 5 个新单词 + 造句，作业要坚持交" },
+    ],
+  },
+
+  {
     id: 8,
     date: "2026-10-28",
     title: "第八课：主题演讲——我最好的朋友",
@@ -343,6 +362,23 @@ const LESSONS = [
 
 
 const WORDS = [
+
+  { w:"quality", p:"/ˈkwɒləti/", m:"n. 品质", e:"What qualities do you value most?" },
+  { w:"value", p:"/ˈvæljuː/", m:"v. 重视；n. 价值", e:"There are two qualities I value most." },
+  { w:"responsibility", p:"/rɪˌspɒnsəˈbɪləti/", m:"n. 责任心", e:"a sense of responsibility" },
+  { w:"sense of boundaries", p:"/sens əv ˈbaʊndriz/", m:"分寸感", e:"A good friend has a sense of boundaries." },
+  { w:"privacy", p:"/ˈprɪvəsi/", m:"n. 隐私", e:"A good friend doesn't mean without personal privacy." },
+  { w:"baseline", p:"/ˈbeɪslaɪn/", m:"n. 底线", e:"We both know each other's baseline." },
+  { w:"respect", p:"/rɪˈspekt/", m:"v. 尊重", e:"We can respect each other." },
+  { w:"stably", p:"/ˈsteɪbli/", m:"adv. 稳定地", e:"go on stably 稳定地走下去" },
+  { w:"constantly", p:"/ˈkɒnstəntli/", m:"adv. 一直、持续地", e:"We talk constantly." },
+  { w:"hang out", p:"/hæŋ aʊt/", m:"phr. 出去玩、瞎逛", e:"Friends often hang out together." },
+  { w:"unknown", p:"/ˌʌnˈnəʊn/", m:"adj. 未知的", e:"try new unknown things" },
+  { w:"might", p:"/maɪt/", m:"modal. 可能（比 can 委婉）", e:"She might get late." },
+  { w:"fail to do", p:"/feɪl tuː duː/", m:"没能做成某事", e:"I fail to get up early." },
+  { w:"as planned", p:"/æz plænd/", m:"按计划", e:"go as planned 按计划进行" },
+  { w:"without", p:"/wɪˈðaʊt/", m:"prep. 没有", e:"without personal privacy" },
+  { w:"oversleep", p:"/ˌəʊvəˈsliːp/", m:"v. 睡过头", e:"I overslept this morning." },
 
   { w:"personality", p:"/ˌpɜːsəˈnæləti/", m:"n. 性格", e:"She has a delicate personality." },
   { w:"delicate", p:"/ˈdelɪkət/", m:"adj. 细腻的", e:"She has a delicate personality." },
