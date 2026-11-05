@@ -163,6 +163,7 @@ footer{padding:22px 0;text-align:center;color:var(--muted);font-size:12px;}
     <nav class="tabs">
       <a href="#/" data-nav="home">首页</a>
       <a href="#/words" data-nav="words">单词本</a>
+      <a href="https://my.feishu.cn/drive/folder/QAKcfTrpNlIlxHdlwN6cvmSTngg?from=space_personal_filelist" target="_blank" rel="noopener">📁 课程</a>
     </nav>
   </div>
 </header>
@@ -196,6 +197,26 @@ footer{padding:22px 0;text-align:center;color:var(--muted);font-size:12px;}
 ================================================================ */
 
 const LESSONS = [
+
+  {
+    id: 10,
+    date: "2026-11-04",
+    title: "第十课：看图说话——用感官让表达更生动",
+    subtitle: "大复习串烧 · 五感形容词 · 描述图片 + 个人观点",
+    tags: ["已更新", "复习", "看图说话", "感官表达"],
+    sections: [
+      { h:"一、热身闲聊：一个人的战斗", type:"list", items:["为新店买家具：<span class='en'>I bought some furniture for the new store.</span>（furniture 家具）","所有事都自己做：<span class='en'>Everything is done by myself.</span>（<span class='no'>✗ is doing by myself</span> → 被动 is done）","工作流程三件套：<span class='b'>量尺寸</span> → <span class='en'>measure the dimension</span>（measure 测量；dimension 具体尺寸范围，size 偏尺码）｜<span class='b'>做报价</span> → <span class='en'>make a quotation</span>（bill 是账单，quotation 才是报价）｜砍价走合同","感受收尾：<span class='en'>I feel so tired.</span>"] },
+      { h:"二、大复习串烧（脱稿检查）", type:"list", items:["<b>品质演讲</b>（第9课）：完整复述 ✅，<span class='ok'>good friends doesn't mean without personal privacy</span> 这次三单说对了！","<b>Best Friend</b>（第8课）：故事+性格一次说全 ✅","<b>家乡邢台</b>（第6课）：when / because / if 都用上了——<span class='en'>I really miss my hometown because I left it when I went to high school.</span>","<b>扬州之旅</b>（第5课）：打乱顺序重组 ✅，加入 not only...but also：<span class='en'>The massage not only made me relax, but also made me healthy. So I really recommend it to everyone.</span>","<b>第三课中译英整段</b>：室内设计师自我介绍，originally / recently / simple atmosphere / proper floor / design aim 全部复现 ✅","<span class='why'>💡 Mike：复习才知道自己真正学到了什么——顺序打乱重新衔接，才是真正掌握。</span>"] },
+      { h:"三、自我介绍·工作进阶版", type:"list", items:["身份更新：建筑设计师 <span class='b'>architect</span>（architecture designer）","开场引入句：<span class='en'>I want to tell you about my work experience.</span>（别生硬开场，先引入）","五句框架：<span class='en'>I'm an architect with a design background, but now I work in interior design for dance studios. Recently I visited many stores, and I especially like a simple atmosphere. I hope I can work in this industry for a long time and communicate with designers from all over the world.</span>","上价值：<span class='en'>The job not only made me get many values, but also raised my salary.</span>","<span class='b'>raise</span> 提升、涨薪（R-A-I-S-E；raise my salary）｜<span class='b'>increase</span> 增加（in-crease）"] },
+      { h:"四、核心技巧：看图说话 👀", type:"list", items:["痛点：遇到不熟悉的东西<span class='b'>词穷</span>，不知道怎么说 → 最简单的方法就是看图说话","❌ 错误做法：只描述图片上有什么（大家也看得到，不需要你说）","✅ 正确做法：<span class='b'>描述 + 个人观点</span>，两段式——第一段说看到了什么，第二段说你的感受/观点","<span class='why'>💡 好的演讲要说出「不一样的东西」——介绍产品、介绍方案本质上也是「高级版看图说话」。</span>","秘诀：<span class='b'>use your senses</span> 调动感官——眼（看）、耳（听）、鼻（闻）、舌（尝）、身（触）+ 感受"] },
+      { h:"五、感官形容词库（五感+感受）", type:"list", items:["👁 <b>看</b>：beautiful / colorful / big / huge","👂 <b>听</b>：loud 大声 / noisy 吵 / quiet 安静","👃 <b>闻</b>：smell good 很香 / <span class='b'>fragrant</span> 花香清新 / <span class='b'>stink</span> 臭（S-T-I-N-K）","👅 <b>尝</b>：delicious / sweet 甜（酸甜苦辣）","✋ <b>触</b>：cold / hot 凉的热的","❤️ <b>感受</b>：relaxed / happy / comfortable / <span class='b'>feel blue</span> 感到低落","<span class='why'>📌 描述一件事不需要五感全说，挑 1-2 个就很生动！</span>"] },
+      { h:"六、实战1：咖啡拉花 ☕", type:"list", items:["形状 <span class='b'>shape</span>（make a shape of flower 做花的形状）","<div class='bbox en'>In the picture, a man is making coffee — he makes a shape of flower with milk. It looks so delicious and smells good. I want to try it now.</div>","套路：描述（谁在做什么）→ 感官（looks / smells）→ 观点（I want to try it）"] },
+      { h:"七、实战2：雨天窗户 🌧", type:"list", items:["朦胧/模糊 <span class='b'>blurry</span>（blur + ry；形容照片模糊）","雨滴 <span class='b'>raindrops</span>（drop = 掉下来，Airdrop 隔空投送同根词）","雨不大用「强」形容：<span class='en'>The raindrop isn't too strong.</span> <span class='why'>主系表，不用动词。</span>","在窗户表面上：<span class='en'>on the surface of the window</span>（surface 表面）","完整第一段：<div class='bbox en'>In the picture, it's a blurry photo on a rainy day. The raindrops aren't too strong on the surface of the window. When I look at the picture I feel blue, because the weather is white and cold. But it looks like summer because the grass is green.</div>","第二段·感受：<div class='bbox en'>But I really like rainy days, because I feel so safe when it rains. I can stay at home, watch movies and eat snacks with friends.</div>","安全感 = <span class='en'>I feel so safe.</span>｜零食 <span class='b'>snacks</span>（注意：是 snacks 不是 snakes 🐍）"] },
+      { h:"八、扬州之旅·感官升级版", type:"list", items:["把感官词汇加进旧演讲，立刻生动一个档次：<div class='bbox en'>I went to Yangzhou last national holiday. Yangzhou has beautiful gardens with special designs. I tried Yangzhou fried rice, but it tastes bad — I felt so disappointed because it's not delicious but expensive. Then I tried the Yangzhou massage — it not only made me relaxed, but also made me happy. I really recommend it to everyone.</div>","用到的感官：看（beautiful gardens）→ 尝（tastes bad）→ 感受（disappointed / relaxed / happy）"] },
+      { h:"九、学习方法：摸鱼复盘法 🐟", type:"list", items:["Mike 建议：摸鱼时花 10 分钟，用学过的表达把今天发生的事情语顺捋一遍","遇到生词立刻记下来——<span class='why'>真实经历过的词记得最牢</span>","Lucy 本课收获总结：能脱稿说 5 分钟的近况+自我介绍；会用感官生动描述画面 ✅"] },
+      { h:"作业", type:"homework", text:"1. 每天挑 1 张照片或 1 件身边的东西，用「描述+观点」两段式说 3-5 句（至少用 1 个感官形容词）\n2. 练熟 5 句话工作版自我介绍（architect 版，含 not only...but also）\n3. 用感官词汇把扬州之旅再说一遍全新版本\n4. 坚持摸鱼复盘：每天捋一遍当天发生的事，生词记下来\n5. 继续每天 5 个新单词 + 造句" },
+    ],
+  },
 
   {
     id: 9,
@@ -362,6 +383,26 @@ const LESSONS = [
 
 
 const WORDS = [
+
+  { w:"furniture", p:"/ˈfɜːnɪtʃə/", m:"n. 家具", e:"I bought some furniture for the new store." },
+  { w:"measure", p:"/ˈmeʒə/", m:"v. 测量", e:"measure the dimension 量尺寸" },
+  { w:"dimension", p:"/daɪˈmenʃn/", m:"n. 尺寸、大小", e:"the dimension of the room" },
+  { w:"quotation", p:"/kwəʊˈteɪʃn/", m:"n. 报价", e:"make a quotation 做报价" },
+  { w:"architect", p:"/ˈɑːkɪtekt/", m:"n. 建筑设计师", e:"I'm an architect." },
+  { w:"architecture", p:"/ˈɑːkɪtektʃə/", m:"n. 建筑学", e:"architecture designer" },
+  { w:"raise", p:"/reɪz/", m:"v. 提升、涨薪", e:"raise my salary 涨工资" },
+  { w:"increase", p:"/ɪnˈkriːs/", m:"v. 增加", e:"increase sales 增加销量" },
+  { w:"shape", p:"/ʃeɪp/", m:"n. 形状", e:"make a shape of flower" },
+  { w:"blurry", p:"/ˈblɜːri/", m:"adj. 模糊的", e:"a blurry photo on a rainy day" },
+  { w:"raindrop", p:"/ˈreɪndrɒp/", m:"n. 雨滴", e:"Raindrops aren't too strong." },
+  { w:"surface", p:"/ˈsɜːfɪs/", m:"n. 表面", e:"on the surface of the window" },
+  { w:"fragrant", p:"/ˈfreɪɡrənt/", m:"adj. 芳香的", e:"The flowers are fragrant." },
+  { w:"stink", p:"/stɪŋk/", m:"v. 发臭", e:"It smells so stink! 很臭！" },
+  { w:"snack", p:"/snæk/", m:"n. 零食", e:"eat snacks 吃零食（不是 snake 蛇🐍）" },
+  { w:"safe", p:"/seɪf/", m:"adj. 安全的", e:"I feel so safe when it rains." },
+  { w:"feel blue", p:"/fiːl bluː/", m:"感到低落", e:"When I look at the picture I feel blue." },
+  { w:"sense", p:"/sens/", m:"n. 感官、感觉", e:"use your senses 调动你的感官" },
+  { w:"opinion", p:"/əˈpɪnjən/", m:"n. 观点", e:"Say your opinion, not just describe." },
 
   { w:"quality", p:"/ˈkwɒləti/", m:"n. 品质", e:"What qualities do you value most?" },
   { w:"value", p:"/ˈvæljuː/", m:"v. 重视；n. 价值", e:"There are two qualities I value most." },
