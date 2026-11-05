@@ -743,6 +743,18 @@ function renderWords(){
 }
 
 /* ================= 路由 ================= */
+/* 强制所有站内跳转都在当前窗口进行，即使有 base target 也不开新窗口 */
+document.addEventListener("click", function(e){
+  const a = e.target.closest("a");
+  if(!a) return;
+  const href = a.getAttribute("href") || "";
+  if(href.charAt(0) === "#"){
+    e.preventDefault();
+    e.stopPropagation();
+    if(location.hash === href){ route(); } else { location.hash = href; }
+  }
+});
+
 function route(){
   document.querySelectorAll("[data-nav]").forEach(a=>a.classList.remove("on"));
   const h = location.hash || "#/";
