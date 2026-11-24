@@ -23,11 +23,11 @@ body{
 
 /* ================= 顶部 ================= */
 header.top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;}
-header.top .wrap{height:58px;display:flex;align-items:center;justify-content:space-between;}
-.logo{font-size:17px;font-weight:800;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px;}
-.logo::before{content:"📖";font-size:18px;}
-nav.tabs{display:flex;gap:6px;}
-nav.tabs a{text-decoration:none;color:var(--muted);font-size:14px;padding:6px 14px;border-radius:999px;}
+header.top .wrap{height:56px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.logo{font-size:16px;font-weight:800;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:6px;white-space:nowrap;flex:none;}
+.logo::before{content:"📖";font-size:17px;}
+nav.tabs{display:flex;gap:4px;margin-left:auto;}
+nav.tabs a{text-decoration:none;color:var(--muted);font-size:13px;padding:6px 9px;border-radius:999px;white-space:nowrap;flex:none;}
 nav.tabs a.on,nav.tabs a:hover{background:var(--accent-soft);color:var(--accent);}
 
 /* ================= 声音设置 ================= */
@@ -151,6 +151,11 @@ footer{padding:22px 0;text-align:center;color:var(--muted);font-size:12px;}
 @media (max-width:560px){
   .hero h1{font-size:25px;}
   .lesson-head h1{font-size:21px;}
+  header.top .wrap{height:50px;padding:0 12px;gap:6px;}
+  .logo{font-size:13px;gap:4px;}
+  .logo::before{font-size:14px;}
+  nav.tabs{gap:2px;}
+  nav.tabs a{font-size:12px;padding:5px 6px;}
 }
 
 /* ================= 训练板块 ================= */
