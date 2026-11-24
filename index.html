@@ -152,6 +152,61 @@ footer{padding:22px 0;text-align:center;color:var(--muted);font-size:12px;}
   .hero h1{font-size:25px;}
   .lesson-head h1{font-size:21px;}
 }
+
+/* ================= 训练板块 ================= */
+.train-tabs{display:flex;gap:8px;margin:16px 0 14px;flex-wrap:wrap;}
+.train-tabs button{
+  flex:1;min-width:100px;border:1px solid var(--line);background:var(--card);
+  border-radius:12px;padding:10px 8px;font-size:14px;font-weight:700;color:var(--muted);
+  cursor:pointer;transition:.15s;font-family:inherit;
+}
+.train-tabs button.on{background:var(--accent-soft);color:var(--accent);border-color:var(--accent);}
+.topic-card{
+  background:linear-gradient(135deg,#FFF6EF,#FFEFE5);border:2px solid #FFD9C8;border-radius:var(--radius);
+  padding:26px 22px;text-align:center;box-shadow:var(--shadow);
+}
+.topic-card .label{font-size:12px;color:var(--muted);letter-spacing:2px;}
+.topic-card .topic{font-size:21px;font-weight:800;margin:10px 0 4px;}
+.topic-card .hint{font-size:13px;color:var(--muted);min-height:22px;}
+.timer-row{display:flex;gap:8px;justify-content:center;margin:16px 0 10px;flex-wrap:wrap;}
+.timer-row .mode{
+  border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 16px;
+  font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;font-family:inherit;
+}
+.timer-row .mode.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+.timer-display{
+  font-size:56px;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.2;
+}
+.timer-display.danger{color:#D64533;animation:blink .5s step-end infinite;}
+@keyframes blink{50%{opacity:.35;}}
+.progress{height:8px;background:#F5E8DA;border-radius:99px;overflow:hidden;margin:8px 0 16px;}
+.progress i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#FFA25E);transition:width .1s linear;}
+.train-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.train-btns button{
+  border:none;border-radius:999px;padding:11px 26px;font-size:15px;font-weight:800;cursor:pointer;
+  font-family:inherit;transition:.15s;
+}
+#btnStart{background:var(--accent);color:#fff;box-shadow:0 4px 12px rgba(255,107,74,.35);}
+#btnStart:hover{transform:translateY(-1px);}
+#btnNext{background:#fff;border:1.5px solid var(--line);color:var(--ink);}
+.train-count{font-size:12px;color:var(--muted);text-align:center;margin-top:12px;}
+.pic-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media (max-width:560px){.pic-grid{grid-template-columns:1fr;}}
+.pic-item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow);text-align:center;}
+.pic-item img{width:100%;border-radius:10px;display:block;}
+.pic-item .cap{font-size:14px;font-weight:700;margin:8px 0;}
+.pic-item button{border:none;background:var(--accent);color:#fff;border-radius:999px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
+.read-item{display:flex;gap:10px;align-items:flex-start;background:#FBF6EE;border:1px solid #F4EBDC;border-radius:11px;padding:10px 13px;margin:8px 0;font-size:14px;}
+.read-item .txt{flex:1;line-height:1.7;}
+.flash-card{
+  background:linear-gradient(135deg,#EFF6FF,#E8F0FE);border:2px solid #C9DBF5;border-radius:var(--radius);
+  padding:26px 22px;text-align:center;cursor:pointer;box-shadow:var(--shadow);
+}
+.flash-card .w{font-size:30px;font-weight:800;color:#2B5797;}
+.flash-card .p{font-size:14px;color:var(--muted);font-family:Georgia,serif;margin-top:2px;}
+.flash-card .hidden-part{display:none;margin-top:12px;font-size:15px;}
+.flash-card.open .hidden-part{display:block;}
+.flash-card .tip{font-size:12px;color:var(--muted);margin-top:14px;}
 </style>
 <base target="_blank">
 </head>
@@ -162,6 +217,7 @@ footer{padding:22px 0;text-align:center;color:var(--muted);font-size:12px;}
     <a class="logo" href="#/">Lucy 的英语复习站</a>
     <nav class="tabs">
       <a href="#/" data-nav="home">首页</a>
+      <a href="#/train" data-nav="train">🎯 训练</a>
       <a href="#/words" data-nav="words">单词本</a>
       <a href="https://my.feishu.cn/drive/folder/QAKcfTrpNlIlxHdlwN6cvmSTngg?from=space_personal_filelist">📁 课程回放</a>
     </nav>
@@ -197,6 +253,25 @@ footer{padding:22px 0;text-align:center;color:var(--muted);font-size:12px;}
 ================================================================ */
 
 const LESSONS = [
+
+  {
+    id: 12,
+    date: "2026-11-22",
+    title: "第十二课：结课模拟考（雅思口语全流程）",
+    subtitle: "Part 1 问答 · Part 2 演讲 · Part 3 讨论 · 全课程总复习",
+    tags: ["已更新", "模拟考", "雅思口语", "结课", "总复习"],
+    sections: [
+      { h:"一、热身闲聊：生病的一周", type:"list", items:["Lucy 这一周嗓子哑了在养病，现在好一些了","恢复 <span class='b'>recover</span>｜休息 <span class='en'>have a rest</span>｜安排 <span class='b'>arrange</span>","喉咙痛：<span class='en'>My throat hurts badly.</span>（throat 喉咙；badly 非常，修饰疼的程度）","声音沙哑：<span class='en'>My voice sounds raspy.</span>（raspy = 沙哑的，最准确）｜声音低沉也可以用 <span class='en'>My voice is down.</span>"] },
+      { h:"二、雅思口语模拟考 · 流程说明", type:"list", items:["<b>Part 1</b>：一问一答，每题回答 2-3 句","<b>Part 2</b>：1-2 分钟主题演讲（给提示卡：where / when / what / how you felt）","<b>Part 3</b>：基于演讲内容深入讨论，一问一答","今天用之前学过的全部内容走一遍完整流程 ✅"] },
+      { h:"三、Part 1 问答实战", type:"list", items:["<b>工作城市</b>：<span class='en'>I work in Beijing. Beijing is a first-tier city with a busy pace. I can learn more skills in this city.</span>","<b>家乡对比</b>：<span class='en'>Xingtai has a warm atmosphere and a slow pace. Beijing has many famous museums and history parks.</span>","<b>旅行偏好</b>：几乎去遍了一线城市，现在更想去扬州这样的二线城市","<b>结伴旅行</b>：<span class='en'>I like traveling with friends because we can try many different delicious foods and have an impressive experience.</span>（impressive 令人难忘的）","<b>交通方式</b>：<span class='en'>For long trips I prefer to travel by airplane, for example to Xinjiang or Hainan. I also like traveling by car because it's more free.</span>","<span class='why'>💡 Lucy 自述：用英语能说两句就不会说了——Part 1 就是要练到答 2-3 句的反射。</span>"] },
+      { h:"四、Part 2 演讲：Describe a trip you enjoyed", type:"list", items:["提示卡要点：where you went / when / what you did / how you felt","开头加副词：<span class='en'>Honestly, I want to share my favorite trip...</span>","用 especially 强化细节：<span class='en'>Especially the Yangzhou fried rice — I had high expectations, but I felt disappointed.</span>","结尾用 not only...but also 点题：<span class='en'>Yangzhou not only has delicious food, but also many beautiful sceneries. That's the reason I love this city.</span>","完整优化版：<div class='bbox en'>Honestly, I want to share my favorite trip. I went to Yangzhou last National Day with my friends. Yangzhou is a second-tier city with different local cultures and beautiful scenery. I had high expectations of the famous Yangzhou fried rice, but when I tried it I felt disappointed because it was not delicious and very expensive. However, the Yangzhou massage was amazing — when I tried it, I felt not only relaxed but also healthy. Yangzhou not only has delicious food, but also beautiful scenery. That's the reason I love this city, and I recommend it to everyone.</div>"] },
+      { h:"五、Part 3 讨论实战", type:"list", items:["<b>Why do many people like traveling?</b> <span class='en'>Because I can try different delicious food and have impressive experiences with my friends.</span>","<b>Traveling helps people understand cultures?</b> <span class='en'>I think travel is the best way to know local cultures.</span>","<b>Should governments limit the number of tourists?</b> <span class='en'>Yes. If a city is very famous and too many people go there at the same time, tourists' experience will not be good, and the environment could be destroyed.</span>（destroy 破坏；limit 限流）"] },
+      { h:"六、高分技巧总结 ⭐", type:"list", items:["<b>副词开头</b>：Honestly / Actually / Well —— 直接说句子太书面，加副词更口语生动","<b>专业词替换法</b>：不会说的词不要直译，用简单词解释——「时代前沿城市」→ <span class='en'>a city with fast development, we can get new information earlier</span>","<b>金句：避风港</b> <span class='en'>safe haven</span>：<span class='en'>Xingtai is my safe haven, but Beijing is my work-hard site.</span>","<b>演讲结构</b>：开场白（Well, I want to share...）→ 过程（especially 强化细节）→ 结尾点题（That's the reason I love...）"] },
+      { h:"七、结课总复习路线图（9月 → 11月）", type:"list", items:["第1-2课 <span class='b'>疑问句</span>：疑问词 + 助动词 + 主语（what / where / who / how 大家族）","第3课 <span class='b'>并列句</span>：and / but / so 把句子连起来","第4课 <span class='b'>场景实战</span>：点咖啡、酒店入住（Lucy 评价：刚好国庆假期后点题，印象最深的课！）","第5课 <span class='b'>Not only...but also</span> + 公司介绍演讲","第6课 <span class='b'>状语从句</span>：when / because / if / although","第8-9课 <span class='b'>演讲追问</span>：观点 → 解释 → 感受","第10课 <span class='b'>看图说话</span>：五感 + 观点","第11课 <span class='b'>即兴计时</span>：15秒/30秒/1分钟刻意练习","<span class='why'>📌 笔记网站永远都在，随时回来复习；顶部新增「训练」板块可以自助抽题练习！</span>"] },
+      { h:"八、Mike 的结课建议 🎓", type:"list", items:["<b>找语伴</b>：下载 <span class='b'>HelloTalk</span>，找想学中文的外国朋友互聊——<span class='why'>真正用英语聊一次天，比上三四节课更有效</span>","<b>敢于开口</b>：老外说中文也会怕出丑，大家都一样；学会多问问题，让对方多说","<b>英语趣配音</b>：用影视片段配音，边玩边学生动表达（Lucy 发音好，非常适合）","<b>实战为王</b>：大量输入 + 真实社交，英语才会变成生活的一部分","有问题随时问 Mike ✅"] },
+      { h:"结课作业", type:"homework", text:"1. 用雅思流程自测一遍：Part 1 问答 → Part 2 扬州演讲 → Part 3 讨论\n2. 去 HelloTalk 找一个语伴，完成第一次真实英语聊天\n3. 每天用「训练」板块抽 1 个话题计时说（60 秒）\n4. 常回笔记网站复习，12 节课的知识都在这了\n5. 祝 Lucy 一切顺利，英语成为生活的一部分 🎉" },
+    ],
+  },
 
   {
     id: 11,
@@ -402,6 +477,18 @@ const LESSONS = [
 
 
 const WORDS = [
+
+  { w:"recover", p:"/rɪˈkʌvə/", m:"v. 恢复", e:"I'm recovering from a cold." },
+  { w:"throat", p:"/θrəʊt/", m:"n. 喉咙", e:"My throat hurts badly." },
+  { w:"raspy", p:"/ˈrɑːspi/", m:"adj. 沙哑的", e:"My voice sounds raspy." },
+  { w:"arrange", p:"/əˈreɪndʒ/", m:"v. 安排", e:"arrange something 安排事情" },
+  { w:"impressive", p:"/ɪmˈpresɪv/", m:"adj. 令人印象深刻的", e:"an impressive experience" },
+  { w:"transport", p:"/ˈtrænspɔːt/", m:"n. 交通方式", e:"What transport do you prefer?" },
+  { w:"scenery", p:"/ˈsiːnəri/", m:"n. 景色", e:"Yangzhou has beautiful scenery." },
+  { w:"destroy", p:"/dɪˈstrɔɪ/", m:"v. 破坏", e:"The environment could be destroyed." },
+  { w:"limit", p:"/ˈlɪmɪt/", m:"v. 限制", e:"limit the number of tourists 限流" },
+  { w:"safe haven", p:"/seɪf ˈheɪvn/", m:"避风港", e:"Xingtai is my safe haven." },
+  { w:"expectation", p:"/ˌekspekˈteɪʃn/", m:"n. 期待", e:"I had high expectations of the fried rice." },
 
   { w:"affect", p:"/əˈfekt/", m:"v. 影响（动词）", e:"It will affect my sleep." },
   { w:"influence", p:"/ˈɪnfluəns/", m:"n. 影响（名词）", e:"Coffee has an influence on my sleep." },
@@ -645,6 +732,209 @@ const WORDS = [
 ];
 
 
+/* ================= 训练板块 ================= */
+const TRAIN_TOPICS = [
+  { t:"自我介绍（工作版）", h:"30秒 · architect / 设计背景 / not only...but also" },
+  { t:"描述你的家乡（邢台）", h:"when / because / if · 慢节奏 · safe haven" },
+  { t:"北京是个怎样的城市", h:"first-tier city · Honestly 开头 · 博物馆历史" },
+  { t:"最好的朋友（Who & Why）", h:"高中同学 · delicate / straightforward · 小故事" },
+  { t:"友谊中最看重的品质", h:"a sense of responsibility / boundaries · 观点→解释→感受" },
+  { t:"描述一次愉快的旅行（扬州）", h:"Honestly 开头 · especially 细节 · not only 结尾点题" },
+  { t:"最开心的一天", h:"爬山 → 美食 → 游戏到 midnight" },
+  { t:"帮助别人的经历", h:"comfort / encourage / teach · succeed" },
+  { t:"收到的一份礼物", h:"doll · meaningful · 留了十年" },
+  { t:"教朋友怎么点咖啡", h:"sweet or bitter · recommend · Can I get a cup of mocha?" },
+  { t:"介绍你的公司", h:"舞蹈室设计 · not only...but also · 八年经验" },
+  { t:"AI 会取代我的工作吗？", h:"问句开头 · because 展开 · although 转折" },
+  { t:"你心目中的成功生活", h:"两个条件 · earn one million · I think" },
+  { t:"描述你的完美周末", h:"first... second... · take advantage of time" },
+  { t:"政府应该限制游客数量吗？", h:"Yes/No + because · tourists experience · destroy" },
+  { t:"看图说话：咖啡拉花", h:"15秒 · There's a man making... · affect my sleep" },
+  { t:"看图说话：雨天窗户", h:"15秒 · feel blue · raindrops · was taken in summer" },
+  { t:"为什么很多人喜欢旅行？", h:"delicious food · impressive experience" },
+];
+
+const READ_ALOUD = [
+  { t:"自我介绍 · 30秒版", s:"I want to tell you about my work experience. I'm an architect with a design background, but now I work in interior design for dance studios. Recently I visited many new stores and I especially like a simple atmosphere. This job not only made me get many values, but also raised my salary, so I love my job." },
+  { t:"Best Friend · 完整版", s:"My best friend is my high school classmate. We studied in the same city for university, and now we also work in the same city. I think our personalities match well — she has a delicate personality and thinks things through, while I am pretty straightforward, so we feel really comfortable staying with each other." },
+  { t:"看重的品质 · 完整版", s:"I think there are two qualities I value most in a good friend. First, a sense of responsibility — because friends often hang out together or try new unknown things, and I really like this. If without a sense of responsibility, she might get late or fail to go as planned. Second, a sense of boundaries. A good friend doesn't mean without personal privacy — I hope we both know each other's baseline, so we can respect each other and go on stably." },
+  { t:"扬州之旅 · 雅思 Part 2 版", s:"Honestly, I want to share my favorite trip. I went to Yangzhou last National Day with my friends. Yangzhou is a second-tier city with different local cultures and beautiful scenery. I had high expectations of the famous Yangzhou fried rice, but when I tried it I felt disappointed because it was not delicious and very expensive. However, the Yangzhou massage was amazing — when I tried it, I felt not only relaxed but also healthy. Yangzhou not only has delicious food, but also beautiful scenery. That's the reason I love this city, and I recommend it to everyone." },
+  { t:"雨窗图 · 15秒版", s:"In this picture it's a rainy day. When I look at the picture I feel blue. There are many cars on the street and many raindrops on the window. I think the picture was taken in summer." },
+  { t:"咖啡图 · 15秒版", s:"In this picture, there's a man making coffee — he made a flower shape on the coffee with milk. It looks delicious. Usually I don't like to drink coffee because it will affect my sleep." },
+];
+
+let trainState = { tab:"topic", mode:60, topic:null, used:[], endAt:null, timerInt:null, flashIdx:-1 };
+
+function pickTopic(){
+  if(trainState.used.length >= TRAIN_TOPICS.length) trainState.used = [];
+  let i;
+  do { i = Math.floor(Math.random()*TRAIN_TOPICS.length); } while(trainState.used.includes(i));
+  trainState.used.push(i);
+  trainState.topic = TRAIN_TOPICS[i];
+}
+
+function beep(){
+  try{
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    o.frequency.value = 880; g.gain.value = 0.15;
+    o.start();
+    setTimeout(()=>{ o.frequency.value = 1174; }, 160);
+    setTimeout(()=>{ o.stop(); ctx.close(); }, 350);
+  }catch(e){}
+}
+
+function stopTimer(){
+  if(trainState.timerInt){ clearInterval(trainState.timerInt); trainState.timerInt = null; }
+  trainState.endAt = null;
+}
+
+function startTimer(){
+  stopTimer();
+  trainState.endAt = Date.now() + trainState.mode*1000;
+  const disp = document.getElementById("timerDisp");
+  const bar = document.getElementById("timerBar");
+  const btn = document.getElementById("btnStart");
+  btn.textContent = "重新开始";
+  trainState.timerInt = setInterval(()=>{
+    const left = Math.max(0, Math.ceil((trainState.endAt - Date.now())/1000));
+    disp.textContent = left + "s";
+    bar.style.width = ((trainState.mode - left)/trainState.mode*100) + "%";
+    disp.classList.toggle("danger", left <= 5 && left > 0);
+    if(left <= 0){
+      stopTimer();
+      disp.textContent = "时间到！";
+      disp.classList.remove("danger");
+      bar.style.width = "100%";
+      beep();
+      if("vibrate" in navigator) navigator.vibrate(300);
+      const card = document.getElementById("topicCard");
+      if(card){ card.style.borderColor = "#D64533"; setTimeout(()=>{ card.style.borderColor = ""; }, 1200); }
+      btn.textContent = "再来一次";
+    }
+  }, 100);
+}
+
+function switchTrainTab(tab){
+  trainState.tab = tab;
+  stopTimer();
+  renderTrain();
+}
+
+function renderTrain(){
+  document.querySelector('[data-nav="train"]').classList.add("on");
+  let body = "";
+  if(trainState.tab === "topic"){
+    if(!trainState.topic) pickTopic();
+    body = `
+    <div class="topic-card" id="topicCard">
+      <div class="label">TOPIC</div>
+      <div class="topic">${trainState.topic.t}</div>
+      <div class="hint">${trainState.topic.h}</div>
+      <div class="timer-row" id="modeRow">
+        ${[15,30,60].map(m=>`<button class="mode ${trainState.mode===m?'on':''}" onclick="setMode(${m})">${m}秒</button>`).join("")}
+      </div>
+      <div class="timer-display" id="timerDisp">${trainState.mode}s</div>
+      <div class="progress"><i id="timerBar"></i></div>
+      <div class="train-btns">
+        <button id="btnStart" onclick="startTimer()">开始计时</button>
+        <button id="btnNext" onclick="nextTopic()">换一题</button>
+      </div>
+      <div class="train-count">本轮已练 ${trainState.used.length} / ${TRAIN_TOPICS.length} 题</div>
+    </div>
+    <p class="why" style="text-align:center;margin-top:12px;">💡 看到题目立刻开始说，能说多少说多少——卡壳就换简单句，练的是即兴反应</p>`;
+  }
+  else if(trainState.tab === "pic"){
+    body = `
+    <p class="why" style="margin:4px 2px 12px;">用「描述 + 观点」两段式说，至少用 1 个感官形容词（看/听/闻/尝/触）</p>
+    <div class="pic-grid">
+      <div class="pic-item">
+        <img src="coffee-latte.jpg" alt="咖啡拉花">
+        <div class="cap">☕ 咖啡拉花</div>
+        <button onclick="picTimer(this)">⏱ 计时 60 秒</button>
+      </div>
+      <div class="pic-item">
+        <img src="rainy-window.jpg" alt="雨天窗户">
+        <div class="cap">🌧 雨天窗户</div>
+        <button onclick="picTimer(this)">⏱ 计时 60 秒</button>
+      </div>
+    </div>`;
+  }
+  else if(trainState.tab === "read"){
+    body = READ_ALOUD.map((r,i)=>`
+      <div class="read-item">
+        <span class="txt"><b>${r.t}</b><br><span class="en">${r.s}</span></span>
+        ${speakBtn(r.s)}
+      </div>`).join("") +
+      `<p class="why" style="margin-top:10px;">📌 先听一遍 → 跟读 3 遍 → 脱稿说，直到 30 秒内流利完成</p>`;
+  }
+  else if(trainState.tab === "flash"){
+    if(trainState.flashIdx < 0) trainState.flashIdx = Math.floor(Math.random()*WORDS.length);
+    const w = WORDS[trainState.flashIdx];
+    body = `
+    <div class="flash-card" id="flashCard" onclick="this.classList.toggle('open')">
+      <div class="w">${w.w} ${speakBtn(w.w)}</div>
+      <div class="p">${w.p||""}</div>
+      <div class="hidden-part">
+        <div>${w.m||""}</div>
+        <div class="en" style="margin-top:6px;">${w.e||""}</div>
+      </div>
+      <div class="tip">先自己造一个句子，再点开看参考 👆</div>
+    </div>
+    <div class="train-btns" style="margin-top:16px;">
+      <button id="btnStart" onclick="nextFlash()">下一个单词</button>
+    </div>
+    <p class="train-count">共 ${WORDS.length} 词，随机抽取</p>`;
+  }
+
+  app.innerHTML = `
+    <div class="lesson-head">
+      <div class="crumb"><a href="#/">首页</a> / 训练</div>
+      <h1>🎯 自主训练</h1>
+      <div class="meta">每天 10 分钟 · 保持语感 · 全部内容来自 12 节课</div>
+    </div>
+    <div class="train-tabs">
+      <button class="${trainState.tab==='topic'?'on':''}" onclick="switchTrainTab('topic')">🎴 话题抽卡</button>
+      <button class="${trainState.tab==='pic'?'on':''}" onclick="switchTrainTab('pic')">🖼️ 看图说话</button>
+      <button class="${trainState.tab==='read'?'on':''}" onclick="switchTrainTab('read')">🎤 演讲跟读</button>
+      <button class="${trainState.tab==='flash'?'on':''}" onclick="switchTrainTab('flash')">🔤 抽词造句</button>
+    </div>
+    ${body}`;
+  window.scrollTo(0,0);
+}
+
+function setMode(m){
+  trainState.mode = m;
+  stopTimer();
+  renderTrain();
+}
+function nextTopic(){
+  stopTimer();
+  pickTopic();
+  renderTrain();
+}
+function nextFlash(){
+  trainState.flashIdx = Math.floor(Math.random()*WORDS.length);
+  renderTrain();
+}
+let picInt = null;
+function picTimer(btn){
+  if(picInt){ clearInterval(picInt); picInt = null; }
+  let left = 60;
+  btn.textContent = "⏱ " + left + "s";
+  const endAt = Date.now() + 60000;
+  picInt = setInterval(()=>{
+    left = Math.max(0, Math.ceil((endAt - Date.now())/1000));
+    btn.textContent = "⏱ " + left + "s";
+    if(left <= 0){
+      clearInterval(picInt); picInt = null;
+      btn.textContent = "✅ 时间到！再来";
+      beep();
+    }
+  }, 100);
+}
+
 /* ================= 语音功能 ================= */
 let VOICES = [];
 function loadVoices(){
@@ -700,9 +990,7 @@ function renderHome(){
       <h1>Lucy 的英语复习站</h1>
       <p>每节课的笔记都整理在这里，点 🔊 随时跟读。</p>
       <div class="chips">
-        <div class="chip">已更新 <b>${done}</b> 节课</div>
-        <div class="chip">坚持复习</div>
-        <div class="chip"><b>2 个月后</b>看到不一样的自己 ✨</div>
+        <a class="chip" href="#/train" style="text-decoration:none;color:var(--accent);font-weight:700;">🎯 去训练</a>
       </div>
     </div>
     <div class="lesson-grid">
@@ -792,9 +1080,11 @@ document.addEventListener("click", function(e){
 function route(){
   document.querySelectorAll("[data-nav]").forEach(a=>a.classList.remove("on"));
   const h = location.hash || "#/";
+  stopTimer();
   const m = h.match(/^#\/lesson\/(\d+)/);
   if(m){ renderLesson(+m[1]); }
   else if(h==="#/words"){ renderWords(); }
+  else if(h==="#/train"){ renderTrain(); }
   else{ renderHome(); }
 }
 window.addEventListener("hashchange", route);
